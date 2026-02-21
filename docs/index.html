@@ -15,6 +15,36 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        #fireworks-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .celebration-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255,215,0,0.8);
+            z-index: 10000;
+            animation: celebrationPulse 1s ease-in-out infinite;
+            display: none;
+            text-align: center;
+        }
+
+        @keyframes celebrationPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -380,6 +410,8 @@
     </style>
 </head>
 <body>
+    <canvas id="fireworks-canvas"></canvas>
+    <div class="celebration-text" id="celebration-text">🎉 完美！100%正确率 🎉</div>
     <div class="container">
         <header>
             <h1>初二数学压轴题训练系统</h1>
@@ -592,6 +624,11 @@
             const accuracy = total > 0 ? Math.round(correctCount / total * 100) : 0;
             document.getElementById('accuracy').textContent = accuracy + '%';
             document.getElementById('streak').textContent = streak;
+            
+            // 检查是否达到100%正确率
+            if (accuracy === 100 && total >= 10) {
+                triggerCelebration();
+            }
             
             // 保存到本地存储
             localStorage.setItem('mathStats', JSON.stringify({
@@ -1295,6 +1332,93 @@
             const hintDiv = document.getElementById('quadrilateral-hint');
             hintDiv.innerHTML = `<strong>提示：</strong><br>${currentQuadrilateralQuestion.hint}`;
             hintDiv.style.display = 'block';
+        }
+
+        // 庆祝效果（烟花）
+        function triggerCelebration() {
+            const canvas = document.getElementById('fireworks-canvas');
+            const ctx = canvas.getContext('2d');
+            const celebrationText = document.getElementById('celebration-text');
+            
+            // 设置Canvas尺寸
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // 显示庆祝文字
+            celebrationText.style.display = 'block';
+            
+            // 烟花粒子数组
+            const particles = [];
+            const colors = ['#ff0000', '#ff7700', '#ffff00', '#00ff00', '#0077ff', '#ff00ff', '#ff0077'];
+            
+            // 创建烟花粒子
+            function createFirework(x, y) {
+                for (let i = 0; i < 50; i++) {
+                    particles.push({
+                        x: x,
+                        y: y,
+                        vx: (Math.random() - 0.5) * 10,
+                        vy: (Math.random() - 0.5) * 10,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        life: 1,
+                        decay: Math.random() * 0.02 + 0.01
+                    });
+                }
+            }
+            
+            // 动画循环
+            function animate() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach((p, index) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.1; // 重力
+                    p.life -= p.decay;
+                    
+                    if (p.life <= 0) {
+                        particles.splice(index, 1);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.globalAlpha = p.life;
+                        ctx.fill();
+                        ctx.globalAlpha = 1;
+                    }
+                });
+                
+                if (particles.length > 0) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    celebrationText.style.display = 'none';
+                }
+            }
+            
+            // 随机位置发射烟花
+            let count = 0;
+            const maxFireworks = 10;
+            const interval = setInterval(() => {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height * 0.6;
+                createFirework(x, y);
+                
+                if (particles.length === 0 || count === 0) {
+                    animate();
+                }
+                
+                count++;
+                if (count >= maxFireworks) {
+                    clearInterval(interval);
+                }
+            }, 300);
+            
+            // 3秒后隐藏庆祝文字
+            setTimeout(() => {
+                celebrationText.style.display = 'none';
+            }, 5000);
         }
 
         // 页面加载时初始化
