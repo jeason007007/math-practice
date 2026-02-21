@@ -23,6 +23,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 9999;
+            display: none;
         }
 
         .celebration-text {
@@ -38,6 +39,7 @@
             animation: celebrationPulse 1s ease-in-out infinite;
             display: none;
             text-align: center;
+            pointer-events: none;
         }
 
         @keyframes celebrationPulse {
@@ -1340,6 +1342,9 @@
             const ctx = canvas.getContext('2d');
             const celebrationText = document.getElementById('celebration-text');
             
+            // 显示Canvas
+            canvas.style.display = 'block';
+            
             // 设置Canvas尺寸
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -1393,6 +1398,7 @@
                     requestAnimationFrame(animate);
                 } else {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.style.display = 'none';
                     celebrationText.style.display = 'none';
                 }
             }
@@ -1415,8 +1421,9 @@
                 }
             }, 300);
             
-            // 3秒后隐藏庆祝文字
+            // 5秒后隐藏庆祝文字和Canvas
             setTimeout(() => {
+                canvas.style.display = 'none';
                 celebrationText.style.display = 'none';
             }, 5000);
         }
