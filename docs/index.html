@@ -87,8 +87,7 @@
         }
 
         .stat-item {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.25);
             border-radius: 12px;
             padding: 12px;
             text-align: center;
@@ -119,13 +118,12 @@
             padding: 10px 16px;
             border-radius: 12px;
             border: 2px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             color: white;
             font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
+            transition: all 0.2s;
             text-align: center;
         }
 
@@ -133,7 +131,7 @@
             background: white;
             color: #667eea;
             border-color: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         .card {
@@ -141,24 +139,12 @@
             border-radius: 20px;
             padding: 24px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             display: none;
         }
 
         .card.active {
             display: block;
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .question-meta {
