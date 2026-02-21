@@ -47,27 +47,31 @@
             opacity: 0.9;
         }
 
-        .tabs {
+        .tabs-container {
+            margin-bottom: 20px;
+        }
+
+        .tabs-row {
             display: flex;
             background: rgba(255,255,255,0.2);
             border-radius: 16px;
             padding: 4px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             backdrop-filter: blur(10px);
         }
 
         .tab {
             flex: 1;
-            padding: 12px 20px;
+            padding: 10px 12px;
             border-radius: 12px;
             border: none;
             background: transparent;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'MiSans', sans-serif;
+            font-family: 'Noto Sans SC', sans-serif;
         }
 
         .tab.active {
@@ -102,13 +106,23 @@
         }
 
         .question {
-            font-size: 18px;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.8;
             margin-bottom: 20px;
             padding: 16px;
             background: #f8f9fa;
             border-radius: 12px;
             border-left: 4px solid #667eea;
+        }
+
+        .question-type {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
         }
 
         canvas {
@@ -138,7 +152,7 @@
             border: 2px solid #e0e0e0;
             border-radius: 12px;
             font-size: 16px;
-            font-family: 'MiSans', sans-serif;
+            font-family: 'Noto Sans SC', sans-serif;
             transition: all 0.3s;
         }
 
@@ -157,7 +171,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            font-family: 'MiSans', sans-serif;
+            font-family: 'Noto Sans SC', sans-serif;
             margin-bottom: 12px;
         }
 
@@ -198,6 +212,304 @@
             border: 2px solid #f5c6cb;
             display: block;
             animation: shake 0.5s ease;
+        }
+
+        .feedback {
+            background: #fff;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        .feedback-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .knowledge-section {
+            margin: 12px 0;
+            padding: 12px;
+            background: #f0f4ff;
+            border-radius: 8px;
+        }
+
+        .knowledge-section h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .knowledge-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .tip-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 12px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .tip-box strong {
+            color: #856404;
+        }
+
+        /* 考试模式样式 */
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .exam-timer {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .exam-timer.warning {
+            color: #ffc107;
+            animation: pulse 1s infinite;
+        }
+
+        .exam-timer.danger {
+            color: #dc3545;
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .exam-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        .exam-container {
+            display: none;
+        }
+
+        .exam-container.active {
+            display: block;
+        }
+
+        .exam-question-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        .question-nav-btn {
+            width: 36px;
+            height: 36px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .question-nav-btn.current {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .question-nav-btn.answered {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .question-nav-btn.flagged {
+            border-color: #ffc107;
+            background: #fff3cd;
+        }
+
+        .exam-question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .exam-question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .exam-question-number {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .exam-question-type {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .exam-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .exam-actions .btn {
+            flex: 1;
+        }
+
+        .report-card {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .report-card.active {
+            display: block;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .report-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .report-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .report-stat {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .report-stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .report-stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .weakness-section {
+            margin: 20px 0;
+        }
+
+        .weakness-item {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .weakness-item h4 {
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .wrong-question {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .wrong-question h4 {
+            color: #721c24;
+            margin-bottom: 10px;
+        }
+
+        .start-exam-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(40,167,69,0.3);
+        }
+
+        .start-exam-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(40,167,69,0.4);
+        }
+
+        @media (max-width: 600px) {
+            .report-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .progress-bar {
+                width: 120px;
+            }
         }
 
         @keyframes bounceIn {
@@ -247,6 +559,55 @@
             margin-top: 12px;
             font-size: 14px;
             display: none;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .option {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #e8edff;
+        }
+
+        .option.correct-answer {
+            border-color: #28a745;
+            background: #d4edda;
+        }
+
+        .option.wrong-answer {
+            border-color: #dc3545;
+            background: #f8d7da;
+        }
+
+        .knowledge-point {
+            background: #e8f4fd;
+            border: 2px solid #2196f3;
+            color: #1565c0;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 12px;
+            font-size: 14px;
+            display: none;
         }
 
         @media (max-width: 600px) {
@@ -259,7 +620,7 @@
             }
             
             .question {
-                font-size: 16px;
+                font-size: 15px;
                 padding: 14px;
             }
             
@@ -274,6 +635,15 @@
             
             .stat-value {
                 font-size: 20px;
+            }
+
+            .tab {
+                font-size: 12px;
+                padding: 8px 10px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -296,16 +666,113 @@
     <div class="container">
         <header>
             <h1>初二数学压轴题训练</h1>
-            <div class="subtitle">目标：从105分提升到115+分</div>
+            <div class="subtitle">目标：从105分提升到115+分 | 根据真题试卷设计</div>
         </header>
 
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('function')">函数图像</button>
-            <button class="tab" onclick="switchTab('moving')">动点问题</button>
+        <!-- 考试模式入口 -->
+        <div style="text-align: center; margin-bottom: 20px;">
+            <button class="start-exam-btn" onclick="startExam()">📝 开始模拟考试</button>
+        </div>
+
+        <!-- 考试模式界面 -->
+        <div class="exam-container" id="exam-container">
+            <div class="exam-header">
+                <div class="exam-timer" id="exam-timer">30:00</div>
+                <div class="exam-progress">
+                    <span id="exam-progress-text">0/12</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="exam-progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exam-question-nav" id="exam-question-nav"></div>
+            
+            <div class="exam-question-card" id="exam-question-card">
+                <div class="exam-question-header">
+                    <span class="exam-question-number" id="exam-q-number">第 1 题</span>
+                    <span class="exam-question-type" id="exam-q-type">函数</span>
+                </div>
+                <div class="question" id="exam-question"></div>
+                <canvas id="exam-canvas" width="350" height="280"></canvas>
+                <div id="exam-options"></div>
+                <div class="input-group" id="exam-input-group" style="display: none;">
+                    <label id="exam-input-label">答案</label>
+                    <input type="text" id="exam-answer" placeholder="输入你的答案">
+                </div>
+            </div>
+            
+            <div class="exam-actions">
+                <button class="btn btn-secondary" onclick="prevExamQuestion()">上一题</button>
+                <button class="btn btn-secondary" onclick="flagExamQuestion()">标记</button>
+                <button class="btn btn-primary" onclick="nextExamQuestion()">下一题</button>
+            </div>
+            <button class="btn" style="background: #dc3545; color: white; margin-top: 10px;" onclick="submitExam()">交卷</button>
+        </div>
+
+        <!-- 成绩报告界面 -->
+        <div class="report-card" id="report-card">
+            <div class="report-header">
+                <h2>📊 考试成绩报告</h2>
+                <div class="report-score" id="report-score">0</div>
+                <p style="color: #666;">满分 100 分</p>
+            </div>
+            
+            <div class="report-stats">
+                <div class="report-stat">
+                    <div class="report-stat-value" id="report-correct">0</div>
+                    <div class="report-stat-label">答对</div>
+                </div>
+                <div class="report-stat">
+                    <div class="report-stat-value" id="report-wrong">0</div>
+                    <div class="report-stat-label">答错</div>
+                </div>
+                <div class="report-stat">
+                    <div class="report-stat-value" id="report-time">0:00</div>
+                    <div class="report-stat-label">用时</div>
+                </div>
+                <div class="report-stat">
+                    <div class="report-stat-value" id="report-accuracy">0%</div>
+                    <div class="report-stat-label">正确率</div>
+                </div>
+            </div>
+            
+            <div class="weakness-section" id="weakness-section">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🎯 薄弱知识点分析</h3>
+                <div id="weakness-list"></div>
+            </div>
+            
+            <div id="wrong-questions-section">
+                <h3 style="color: #721c24; margin: 20px 0 15px;">❌ 错题详解</h3>
+                <div id="wrong-questions-list"></div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn btn-primary" onclick="reviewWeakness()">📖 针对性复习</button>
+                <button class="btn btn-secondary" onclick="closeReport()">返回练习</button>
+            </div>
+        </div>
+
+        <div class="tabs-container" id="practice-tabs">
+            <div class="tabs-row">
+                <button class="tab active" onclick="switchTab('function')">函数图像</button>
+                <button class="tab" onclick="switchTab('moving')">动点问题</button>
+                <button class="tab" onclick="switchTab('transform')">坐标变换</button>
+            </div>
+            <div class="tabs-row">
+                <button class="tab" onclick="switchTab('quadratic')">二次函数</button>
+                <button class="tab" onclick="switchTab('equation')">方程根</button>
+                <button class="tab" onclick="switchTab('inequality')">不等式</button>
+            </div>
+            <div class="tabs-row">
+                <button class="tab" onclick="switchTab('probability')">概率</button>
+                <button class="tab" onclick="switchTab('geometry')">几何证明</button>
+            </div>
         </div>
 
         <!-- 函数图像练习 -->
         <div class="card active" id="function-card">
+            <div class="question-type">函数与图像</div>
             <div class="question" id="function-question">
                 题目加载中...
             </div>
@@ -313,7 +780,7 @@
             <canvas id="function-canvas" width="350" height="350"></canvas>
             
             <div class="input-group">
-                <label>函数解析式（例如：y=2x+1）</label>
+                <label>函数解析式（例如：y=2x+1 或 y=6/x）</label>
                 <input type="text" id="function-answer" placeholder="输入你的答案">
             </div>
             
@@ -322,11 +789,13 @@
             <button class="btn btn-secondary" onclick="generateFunctionQuestion()">下一题</button>
             
             <div class="result" id="function-result"></div>
+            <div class="feedback" id="function-feedback"></div>
             <div class="hint" id="function-hint"></div>
         </div>
 
         <!-- 动点问题练习 -->
         <div class="card" id="moving-card">
+            <div class="question-type">动点与面积</div>
             <div class="stats">
                 <div class="stat-card">
                     <div class="stat-value" id="correct-count">0</div>
@@ -358,7 +827,136 @@
             <button class="btn btn-secondary" onclick="generateMovingQuestion()">下一题</button>
             
             <div class="result" id="moving-result"></div>
+            <div class="feedback" id="moving-feedback"></div>
             <div class="hint" id="moving-hint"></div>
+        </div>
+
+        <!-- 坐标变换练习 -->
+        <div class="card" id="transform-card">
+            <div class="question-type">旋转与平移</div>
+            <div class="question" id="transform-question">
+                题目加载中...
+            </div>
+            
+            <canvas id="transform-canvas" width="350" height="350"></canvas>
+            
+            <div class="input-group">
+                <label>变换后的坐标（例如：(1,-6)）</label>
+                <input type="text" id="transform-answer" placeholder="输入坐标">
+            </div>
+            
+            <button class="btn btn-primary" onclick="checkTransformAnswer()">提交答案</button>
+            <button class="btn btn-secondary" onclick="showTransformHint()">提示</button>
+            <button class="btn btn-secondary" onclick="generateTransformQuestion()">下一题</button>
+            
+            <div class="result" id="transform-result"></div>
+            <div class="feedback" id="transform-feedback"></div>
+            <div class="hint" id="transform-hint"></div>
+        </div>
+
+        <!-- 二次函数练习 -->
+        <div class="card" id="quadratic-card">
+            <div class="question-type">二次函数性质</div>
+            <div class="question" id="quadratic-question">
+                题目加载中...
+            </div>
+            
+            <canvas id="quadratic-canvas" width="350" height="300"></canvas>
+            
+            <div class="options" id="quadratic-options"></div>
+            
+            <button class="btn btn-primary" onclick="checkQuadraticAnswer()">提交答案</button>
+            <button class="btn btn-secondary" onclick="showQuadraticHint()">提示</button>
+            <button class="btn btn-secondary" onclick="generateQuadraticQuestion()">下一题</button>
+            
+            <div class="result" id="quadratic-result"></div>
+            <div class="feedback" id="quadratic-feedback"></div>
+            <div class="hint" id="quadratic-hint"></div>
+        </div>
+
+        <!-- 方程根练习 -->
+        <div class="card" id="equation-card">
+            <div class="question-type">一元二次方程根</div>
+            <div class="question" id="equation-question">
+                题目加载中...
+            </div>
+            
+            <div class="input-group">
+                <label>计算结果（可以是分数如 5/2）</label>
+                <input type="text" id="equation-answer" placeholder="输入你的答案">
+            </div>
+            
+            <button class="btn btn-primary" onclick="checkEquationAnswer()">提交答案</button>
+            <button class="btn btn-secondary" onclick="showEquationHint()">提示</button>
+            <button class="btn btn-secondary" onclick="generateEquationQuestion()">下一题</button>
+            
+            <div class="result" id="equation-result"></div>
+            <div class="feedback" id="equation-feedback"></div>
+            <div class="hint" id="equation-hint"></div>
+        </div>
+
+        <!-- 不等式练习 -->
+        <div class="card" id="inequality-card">
+            <div class="question-type">不等式组求解</div>
+            <div class="question" id="inequality-question">
+                题目加载中...
+            </div>
+            
+            <div class="input-group">
+                <label>解集（例如：-2&lt;x&lt;3 或 x&gt;5）</label>
+                <input type="text" id="inequality-answer" placeholder="输入解集">
+            </div>
+            
+            <button class="btn btn-primary" onclick="checkInequalityAnswer()">提交答案</button>
+            <button class="btn btn-secondary" onclick="showInequalityHint()">提示</button>
+            <button class="btn btn-secondary" onclick="generateInequalityQuestion()">下一题</button>
+            
+            <div class="result" id="inequality-result"></div>
+            <div class="feedback" id="inequality-feedback"></div>
+            <div class="hint" id="inequality-hint"></div>
+        </div>
+
+        <!-- 概率练习（新增）-->
+        <div class="card" id="probability-card">
+            <div class="question-type">概率与统计</div>
+            <div class="question" id="probability-question">
+                题目加载中...
+            </div>
+            
+            <canvas id="probability-canvas" width="350" height="200"></canvas>
+            
+            <div class="input-group">
+                <label>概率值（例如：2/9 或 0.5）</label>
+                <input type="text" id="probability-answer" placeholder="输入概率">
+            </div>
+            
+            <button class="btn btn-primary" onclick="checkProbabilityAnswer()">提交答案</button>
+            <button class="btn btn-secondary" onclick="showProbabilityHint()">提示</button>
+            <button class="btn btn-secondary" onclick="generateProbabilityQuestion()">下一题</button>
+            
+            <div class="result" id="probability-result"></div>
+            <div class="feedback" id="probability-feedback"></div>
+            <div class="hint" id="probability-hint"></div>
+        </div>
+
+        <!-- 几何证明练习（新增）-->
+        <div class="card" id="geometry-card">
+            <div class="question-type">几何证明</div>
+            <div class="question" id="geometry-question">
+                题目加载中...
+            </div>
+            
+            <canvas id="geometry-canvas" width="350" height="280"></canvas>
+            
+            <div class="options" id="geometry-options"></div>
+            
+            <button class="btn btn-primary" onclick="checkGeometryAnswer()">提交答案</button>
+            <button class="btn btn-secondary" onclick="showGeometryHint()">提示</button>
+            <button class="btn btn-secondary" onclick="generateGeometryQuestion()">下一题</button>
+            
+            <div class="result" id="geometry-result"></div>
+            <div class="feedback" id="geometry-feedback"></div>
+            <div class="hint" id="geometry-hint"></div>
         </div>
     </div>
 
@@ -366,6 +964,10 @@
         // 全局变量
         let currentFunctionQuestion = null;
         let currentMovingQuestion = null;
+        let currentTransformQuestion = null;
+        let currentQuadraticQuestion = null;
+        let currentEquationQuestion = null;
+        let currentInequalityQuestion = null;
         let correctCount = 0;
         let wrongCount = 0;
 
@@ -374,24 +976,34 @@
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
             
-            if (tab === 'function') {
-                document.querySelectorAll('.tab')[0].classList.add('active');
-                document.getElementById('function-card').classList.add('active');
-                generateFunctionQuestion();
-            } else {
-                document.querySelectorAll('.tab')[1].classList.add('active');
-                document.getElementById('moving-card').classList.add('active');
-                generateMovingQuestion();
+            const tabs = document.querySelectorAll('.tab');
+            const tabNames = ['function', 'moving', 'transform', 'quadratic', 'equation', 'inequality', 'probability', 'geometry'];
+            const index = tabNames.indexOf(tab);
+            
+            if (index !== -1) {
+                tabs[index].classList.add('active');
+                document.getElementById(`${tab}-card`).classList.add('active');
+                
+                // 生成对应题目
+                switch(tab) {
+                    case 'function': generateFunctionQuestion(); break;
+                    case 'moving': generateMovingQuestion(); break;
+                    case 'transform': generateTransformQuestion(); break;
+                    case 'quadratic': generateQuadraticQuestion(); break;
+                    case 'equation': generateEquationQuestion(); break;
+                    case 'inequality': generateInequalityQuestion(); break;
+                    case 'probability': generateProbabilityQuestion(); break;
+                    case 'geometry': generateGeometryQuestion(); break;
+                }
             }
         }
 
-        // 生成函数图像题目
+        // ==================== 函数图像模块 ====================
         function generateFunctionQuestion() {
             const types = ['linear', 'inverse'];
             const type = types[Math.floor(Math.random() * types.length)];
             
             if (type === 'linear') {
-                // 一次函数 y = kx + b
                 const k = (Math.floor(Math.random() * 9) + 1) * (Math.random() > 0.5 ? 1 : -1);
                 const b = (Math.floor(Math.random() * 10) + 1) * (Math.random() > 0.5 ? 1 : -1);
                 
@@ -403,7 +1015,6 @@
                     points: []
                 };
                 
-                // 生成两个点
                 for (let x = -3; x <= 3; x++) {
                     const y = k * x + b;
                     if (y >= -5 && y <= 5) {
@@ -412,11 +1023,10 @@
                 }
                 
                 document.getElementById('function-question').innerHTML = 
-                    `如图，直线经过点 A(${currentFunctionQuestion.points[0].x}, ${currentFunctionQuestion.points[0].y}) 和 B(${currentFunctionQuestion.points[1].x}, ${currentFunctionQuestion.points[1].y})，求这条直线的函数解析式。`;
+                    `【一次函数】如图，直线经过点 A(${currentFunctionQuestion.points[0].x}, ${currentFunctionQuestion.points[0].y}) 和 B(${currentFunctionQuestion.points[1].x}, ${currentFunctionQuestion.points[1].y})，求这条直线的函数解析式。`;
                 
                 drawFunctionGraph();
             } else {
-                // 反比例函数 y = k/x
                 const k = (Math.floor(Math.random() * 20) + 1) * (Math.random() > 0.5 ? 1 : -1);
                 const x0 = Math.floor(Math.random() * 5) + 1;
                 const y0 = k / x0;
@@ -429,323 +1039,153 @@
                 };
                 
                 document.getElementById('function-question').innerHTML = 
-                    `如图，双曲线经过点 A(${x0}, ${y0})，求该反比例函数的解析式。`;
+                    `【反比例函数】如图，双曲线经过点 A(${x0}, ${y0})，求该反比例函数的解析式。`;
                 
                 drawInverseGraph();
             }
             
-            // 重置输入和结果
-            document.getElementById('function-answer').value = '';
-            document.getElementById('function-result').className = 'result';
-            document.getElementById('function-result').textContent = '';
-            document.getElementById('function-hint').style.display = 'none';
+            resetResult('function');
         }
 
-        // 绘制一次函数图像
         function drawFunctionGraph() {
             const canvas = document.getElementById('function-canvas');
             const ctx = canvas.getContext('2d');
-            const w = canvas.width;
-            const h = canvas.height;
+            const w = canvas.width, h = canvas.height;
             
             ctx.clearRect(0, 0, w, h);
+            drawAxes(ctx, w, h);
             
-            // 坐标轴
-            const padding = 40;
-            const axisLength = w - padding * 2;
-            
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
-            
-            // x 轴
-            ctx.beginPath();
-            ctx.moveTo(padding, h / 2);
-            ctx.lineTo(w - padding, h / 2);
-            ctx.stroke();
-            
-            // y 轴
-            ctx.beginPath();
-            ctx.moveTo(w / 2, padding);
-            ctx.lineTo(w / 2, h - padding);
-            ctx.stroke();
-            
-            // 刻度
-            ctx.fillStyle = '#666';
-            ctx.font = '12px MiSans';
-            ctx.textAlign = 'center';
-            
-            for (let i = -5; i <= 5; i++) {
-                if (i !== 0) {
-                    const x = w / 2 + i * (axisLength / 10);
-                    const y = h / 2;
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(x, y - 5);
-                    ctx.lineTo(x, y + 5);
-                    ctx.stroke();
-                    
-                    ctx.fillText(i.toString(), x, y + 20);
-                }
-            }
-            
-            ctx.textAlign = 'right';
-            for (let i = -5; i <= 5; i++) {
-                if (i !== 0) {
-                    const x = w / 2;
-                    const y = h / 2 - i * (axisLength / 10);
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(x - 5, y);
-                    ctx.lineTo(x + 5, y);
-                    ctx.stroke();
-                    
-                    ctx.fillText(i.toString(), x - 10, y + 4);
-                }
-            }
-            
-            // 绘制函数
             const {k, b} = currentFunctionQuestion;
             ctx.strokeStyle = '#667eea';
             ctx.lineWidth = 3;
             ctx.beginPath();
             
-            for (let px = padding; px <= w - padding; px++) {
-                const x = (px - w / 2) / (axisLength / 10);
+            for (let px = 40; px <= w - 40; px++) {
+                const x = (px - w / 2) / 27;
                 const y = k * x + b;
-                const py = h / 2 - y * (axisLength / 10);
+                const py = h / 2 - y * 27;
                 
-                if (py >= padding && py <= h - padding) {
-                    if (px === padding) {
-                        ctx.moveTo(px, py);
-                    } else {
-                        ctx.lineTo(px, py);
-                    }
+                if (py >= 40 && py <= h - 40) {
+                    if (px === 40) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
                 }
             }
             ctx.stroke();
             
-            // 标记点
-            ctx.fillStyle = '#764ba2';
-            currentFunctionQuestion.points.slice(0, 2).forEach(point => {
-                const px = w / 2 + point.x * (axisLength / 10);
-                const py = h / 2 - point.y * (axisLength / 10);
-                
-                ctx.beginPath();
-                ctx.arc(px, py, 6, 0, Math.PI * 2);
-                ctx.fill();
-            });
+            drawPoints(ctx, currentFunctionQuestion.points.slice(0, 2), w, h);
         }
 
-        // 绘制反比例函数图像
         function drawInverseGraph() {
             const canvas = document.getElementById('function-canvas');
             const ctx = canvas.getContext('2d');
-            const w = canvas.width;
-            const h = canvas.height;
+            const w = canvas.width, h = canvas.height;
             
             ctx.clearRect(0, 0, w, h);
+            drawAxes(ctx, w, h);
             
-            // 坐标轴
-            const padding = 40;
-            const axisLength = w - padding * 2;
-            
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 2;
-            
-            // x 轴
-            ctx.beginPath();
-            ctx.moveTo(padding, h / 2);
-            ctx.lineTo(w - padding, h / 2);
-            ctx.stroke();
-            
-            // y 轴
-            ctx.beginPath();
-            ctx.moveTo(w / 2, padding);
-            ctx.lineTo(w / 2, h - padding);
-            ctx.stroke();
-            
-            // 刻度
-            ctx.fillStyle = '#666';
-            ctx.font = '12px MiSans';
-            ctx.textAlign = 'center';
-            
-            for (let i = -5; i <= 5; i++) {
-                if (i !== 0) {
-                    const x = w / 2 + i * (axisLength / 10);
-                    const y = h / 2;
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(x, y - 5);
-                    ctx.lineTo(x, y + 5);
-                    ctx.stroke();
-                    
-                    ctx.fillText(i.toString(), x, y + 20);
-                }
-            }
-            
-            ctx.textAlign = 'right';
-            for (let i = -5; i <= 5; i++) {
-                if (i !== 0) {
-                    const x = w / 2;
-                    const y = h / 2 - i * (axisLength / 10);
-                    
-                    ctx.beginPath();
-                    ctx.moveTo(x - 5, y);
-                    ctx.lineTo(x + 5, y);
-                    ctx.stroke();
-                    
-                    ctx.fillText(i.toString(), x - 10, y + 4);
-                }
-            }
-            
-            // 绘制双曲线
             const {k} = currentFunctionQuestion;
             ctx.strokeStyle = '#667eea';
             ctx.lineWidth = 3;
             
-            // 第一象限
+            // 第一/三象限分支
             ctx.beginPath();
             for (let x = 0.1; x <= 5; x += 0.1) {
                 const y = k / x;
                 if (y >= -5 && y <= 5) {
-                    const px = w / 2 + x * (axisLength / 10);
-                    const py = h / 2 - y * (axisLength / 10);
-                    
-                    if (x === 0.1) {
-                        ctx.moveTo(px, py);
-                    } else {
-                        ctx.lineTo(px, py);
-                    }
+                    const px = w / 2 + x * 27;
+                    const py = h / 2 - y * 27;
+                    if (x === 0.1) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
                 }
             }
             ctx.stroke();
             
-            // 第三象限
             ctx.beginPath();
             for (let x = -5; x <= -0.1; x += 0.1) {
                 const y = k / x;
                 if (y >= -5 && y <= 5) {
-                    const px = w / 2 + x * (axisLength / 10);
-                    const py = h / 2 - y * (axisLength / 10);
-                    
-                    if (x === -5) {
-                        ctx.moveTo(px, py);
-                    } else {
-                        ctx.lineTo(px, py);
-                    }
+                    const px = w / 2 + x * 27;
+                    const py = h / 2 - y * 27;
+                    if (x === -5) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
                 }
             }
             ctx.stroke();
             
-            // 标记点
-            ctx.fillStyle = '#764ba2';
-            const point = currentFunctionQuestion.points[0];
-            const px = w / 2 + point.x * (axisLength / 10);
-            const py = h / 2 - point.y * (axisLength / 10);
-            
-            ctx.beginPath();
-            ctx.arc(px, py, 6, 0, Math.PI * 2);
-            ctx.fill();
+            drawPoints(ctx, currentFunctionQuestion.points, w, h);
         }
 
-        // 检查函数答案
         function checkFunctionAnswer() {
             const userAnswer = document.getElementById('function-answer').value.replace(/\s/g, '');
             const correctAnswer = currentFunctionQuestion.answer.replace(/\s/g, '');
             
-            const resultDiv = document.getElementById('function-result');
+            const isCorrect = userAnswer === correctAnswer || 
+                userAnswer.replace(/y=/, '') === correctAnswer.replace(/y=/, '') ||
+                simplifyAnswer(userAnswer) === simplifyAnswer(correctAnswer);
             
-            // 简单的答案匹配（可以优化）
-            if (userAnswer === correctAnswer || 
-                userAnswer.replace(/y=/, '') === correctAnswer.replace(/y=/, '')) {
-                resultDiv.className = 'result correct';
-                resultDiv.textContent = '✓ 回答正确！';
-                correctCount++;
-            } else {
-                resultDiv.className = 'result wrong';
-                resultDiv.textContent = `✗ 答案错误。正确答案是：${currentFunctionQuestion.answer}`;
-                wrongCount++;
-            }
-            
-            updateStats();
+            showResult('function', isCorrect, currentFunctionQuestion.answer);
+            updateStats(isCorrect);
         }
 
-        // 显示函数提示
         function showFunctionHint() {
             const hintDiv = document.getElementById('function-hint');
-            
             if (currentFunctionQuestion.type === 'linear') {
-                hintDiv.innerHTML = `
-                    <strong>提示：</strong><br>
+                hintDiv.innerHTML = `<strong>解题步骤：</strong><br>
                     1. 设函数解析式为 y = kx + b<br>
-                    2. 将两个点的坐标代入方程组<br>
-                    3. 解方程组求出 k 和 b 的值
-                `;
+                    2. 将点 A 和点 B 的坐标分别代入<br>
+                    3. 解方程组求出 k 和 b<br>
+                    <strong>技巧：</strong>先用两点式求斜率 k = (y₂-y₁)/(x₂-x₁)`;
             } else {
-                hintDiv.innerHTML = `
-                    <strong>提示：</strong><br>
-                    1. 设反比例函数解析式为 y = k/x<br>
-                    2. 将点的坐标代入，求出 k 的值<br>
-                    3. 注意：k = x × y
-                `;
+                hintDiv.innerHTML = `<strong>解题步骤：</strong><br>
+                    1. 设反比例函数 y = k/x<br>
+                    2. 将点坐标代入：y₀ = k/x₀<br>
+                    3. 求出 k = x₀ × y₀<br>
+                    <strong>技巧：</strong>k = 横坐标 × 纵坐标`;
             }
-            
             hintDiv.style.display = 'block';
         }
 
-        // 生成动点问题
+        // ==================== 动点问题模块 ====================
         function generateMovingQuestion() {
-            const width = Math.floor(Math.random() * 4) + 6; // 6-10
-            const height = Math.floor(Math.random() * 4) + 6; // 6-10
-            const pSpeed = Math.floor(Math.random() * 3) + 1; // 1-3
-            const qSpeed = Math.floor(Math.random() * 3) + 1; // 1-3
+            const width = Math.floor(Math.random() * 4) + 6;
+            const height = Math.floor(Math.random() * 4) + 6;
+            const pSpeed = Math.floor(Math.random() * 3) + 1;
+            const qSpeed = Math.floor(Math.random() * 3) + 1;
             
             currentMovingQuestion = {
-                width: width,
-                height: height,
-                pSpeed: pSpeed,
-                qSpeed: qSpeed,
-                answer: `S=${width * pSpeed / 2}t`,
+                width, height, pSpeed, qSpeed,
+                answer: `S=${width * qSpeed / 2}t`,
                 maxTime: Math.min(height / pSpeed, width / qSpeed)
             };
             
             document.getElementById('moving-question').innerHTML = `
-                如图，在矩形 ABCD 中，AB = ${width}，BC = ${height}。点 P 从点 A 出发，以每秒 ${pSpeed} 个单位的速度沿 AD 边向 D 运动，点 Q 从点 B 出发，以每秒 ${qSpeed} 个单位的速度沿 BC 边向 C 运动。两点同时出发，运动时间为 t 秒。设 t 秒后，△PBQ 的面积为 S，求 S 与 t 的函数关系式。
-            `;
+                【矩形动点】如图，在矩形 ABCD 中，AB = ${width}，BC = ${height}。<br>
+                点 P 从点 A 出发，以每秒 ${pSpeed} 个单位沿 AD 向 D 运动；<br>
+                点 Q 从点 B 出发，以每秒 ${qSpeed} 个单位沿 BC 向 C 运动。<br>
+                两点同时出发，设运动 t 秒后 △PBQ 的面积为 S，求 S 与 t 的关系式。`;
             
             drawMovingGraph();
-            
-            // 重置输入和结果
-            document.getElementById('moving-answer').value = '';
-            document.getElementById('moving-result').className = 'result';
-            document.getElementById('moving-result').textContent = '';
-            document.getElementById('moving-hint').style.display = 'none';
+            resetResult('moving');
         }
 
-        // 绘制动点图
         function drawMovingGraph() {
             const canvas = document.getElementById('moving-canvas');
             const ctx = canvas.getContext('2d');
-            const w = canvas.width;
-            const h = canvas.height;
+            const w = canvas.width, h = canvas.height;
             
             ctx.clearRect(0, 0, w, h);
             
             const {width, height, pSpeed, qSpeed} = currentMovingQuestion;
-            
-            // 计算缩放比例
             const scale = Math.min((w - 80) / width, (h - 80) / height);
             const offsetX = (w - width * scale) / 2;
             const offsetY = (h - height * scale) / 2;
             
-            // 绘制矩形
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 3;
             ctx.strokeRect(offsetX, offsetY, width * scale, height * scale);
             
-            // 标记顶点
             ctx.fillStyle = '#333';
-            ctx.font = '16px MiSans';
+            ctx.font = '16px Noto Sans SC';
             ctx.textAlign = 'center';
             
             const points = {
@@ -760,49 +1200,32 @@
             ctx.fillText('C', points.C.x + 20, points.C.y + 5);
             ctx.fillText('D', points.D.x - 20, points.D.y + 5);
             
-            // 标记边长
             ctx.fillStyle = '#666';
-            ctx.font = '14px MiSans';
+            ctx.font = '14px Noto Sans SC';
             ctx.fillText(`AB = ${width}`, (points.A.x + points.B.x) / 2, points.A.y + 30);
             ctx.fillText(`BC = ${height}`, points.B.x + 30, (points.B.y + points.C.y) / 2);
             
-            // 绘制运动方向箭头
+            // 运动方向
             ctx.strokeStyle = '#e74c3c';
             ctx.lineWidth = 2;
             
-            // P 点运动方向
             ctx.beginPath();
             ctx.moveTo(points.A.x, points.A.y - 20);
             ctx.lineTo(points.A.x, points.A.y - height * scale + 20);
             ctx.stroke();
+            drawArrow(ctx, points.A.x, points.A.y - height * scale + 20, 'up');
             
-            // 箭头
-            ctx.beginPath();
-            ctx.moveTo(points.A.x - 8, points.A.y - height * scale + 30);
-            ctx.lineTo(points.A.x, points.A.y - height * scale + 20);
-            ctx.lineTo(points.A.x + 8, points.A.y - height * scale + 30);
-            ctx.stroke();
-            
-            // Q 点运动方向
             ctx.beginPath();
             ctx.moveTo(points.B.x, points.B.y - 20);
             ctx.lineTo(points.B.x, points.B.y - height * scale + 20);
             ctx.stroke();
+            drawArrow(ctx, points.B.x, points.B.y - height * scale + 20, 'up');
             
-            // 箭头
-            ctx.beginPath();
-            ctx.moveTo(points.B.x - 8, points.B.y - height * scale + 30);
-            ctx.lineTo(points.B.x, points.B.y - height * scale + 20);
-            ctx.lineTo(points.B.x + 8, points.B.y - height * scale + 30);
-            ctx.stroke();
-            
-            // 标记速度
             ctx.fillStyle = '#e74c3c';
-            ctx.font = '12px MiSans';
+            ctx.font = '12px Noto Sans SC';
             ctx.fillText(`v=${pSpeed}`, points.A.x - 35, points.A.y - height * scale / 2);
             ctx.fillText(`v=${qSpeed}`, points.B.x + 35, points.B.y - height * scale / 2);
             
-            // 标记动点位置（示例）
             ctx.fillStyle = '#764ba2';
             ctx.beginPath();
             ctx.arc(points.A.x, points.A.y - height * scale / 3, 5, 0, Math.PI * 2);
@@ -815,57 +1238,2565 @@
             ctx.fillText('Q', points.B.x + 15, points.B.y - height * scale / 3 + 5);
         }
 
-        // 检查动点答案
         function checkMovingAnswer() {
             const userAnswer = document.getElementById('moving-answer').value.replace(/\s/g, '');
             const correctAnswer = currentMovingQuestion.answer.replace(/\s/g, '');
             
-            const resultDiv = document.getElementById('moving-result');
+            const isCorrect = userAnswer === correctAnswer || 
+                userAnswer.replace(/S=/, '') === correctAnswer.replace(/S=/, '');
             
-            if (userAnswer === correctAnswer || 
-                userAnswer.replace(/S=/, '') === correctAnswer.replace(/S=/, '')) {
-                resultDiv.className = 'result correct';
-                resultDiv.textContent = '✓ 回答正确！';
-                correctCount++;
-            } else {
-                resultDiv.className = 'result wrong';
-                resultDiv.textContent = `✗ 答案错误。正确答案是：${currentMovingQuestion.answer} (0 ≤ t ≤ ${currentMovingQuestion.maxTime.toFixed(2)})`;
-                wrongCount++;
-            }
-            
-            updateStats();
+            showResult('moving', isCorrect, currentMovingQuestion.answer + ` (0 ≤ t ≤ ${currentMovingQuestion.maxTime.toFixed(1)})`);
+            updateStats(isCorrect);
         }
 
-        // 显示动点提示
         function showMovingHint() {
-            const hintDiv = document.getElementById('moving-hint');
             const {width, pSpeed, qSpeed} = currentMovingQuestion;
+            document.getElementById('moving-hint').innerHTML = `
+                <strong>解题思路：</strong><br>
+                1. △PBQ 的面积 = ½ × 底 × 高 = ½ × PB × BQ<br>
+                2. PB = AB = ${width}（不变）<br>
+                3. BQ = ${qSpeed}t（Q 点移动的距离）<br>
+                4. S = ½ × ${width} × ${qSpeed}t = ${width * qSpeed / 2}t<br>
+                <strong>注意：</strong>确定 t 的取值范围`;
+            document.getElementById('moving-hint').style.display = 'block';
+        }
+
+        // ==================== 坐标变换模块（新增）====================
+        function generateTransformQuestion() {
+            const types = ['rotate', 'translate'];
+            const type = types[Math.floor(Math.random() * types.length)];
             
-            hintDiv.innerHTML = `
-                <strong>提示：</strong><br>
-                1. △PBQ 的面积 = ½ × PB × BQ<br>
-                2. PB = ${width}（不变）<br>
-                3. BQ = ${qSpeed}t（随时间变化）<br>
-                4. 所以 S = ½ × ${width} × ${qSpeed}t = ${width * qSpeed / 2}t
-            `;
+            // 原始点
+            const x = Math.floor(Math.random() * 5) + 1;
+            const y = Math.floor(Math.random() * 5) + 1;
             
+            if (type === 'rotate') {
+                // 绕原点逆时针旋转90度：(x, y) → (-y, x)
+                currentTransformQuestion = {
+                    type: 'rotate',
+                    original: {x, y},
+                    answer: `(${-y},${x})`,
+                    steps: ['绕原点逆时针旋转90°', '(x, y) → (-y, x)']
+                };
+                
+                document.getElementById('transform-question').innerHTML = `
+                    【坐标旋转】如图，点 A 的坐标是 (${x}, ${y})。<br>
+                    将点 A 绕原点 O 逆时针旋转 90° 得到点 A'，求点 A' 的坐标。`;
+            } else {
+                // 平移：向下平移 n 个单位
+                const n = Math.floor(Math.random() * 4) + 2;
+                currentTransformQuestion = {
+                    type: 'translate',
+                    original: {x, y},
+                    translateY: -n,
+                    answer: `(${x},${y - n})`,
+                    steps: [`向下平移 ${n} 个单位`, 'y 坐标减 n']
+                };
+                
+                document.getElementById('transform-question').innerHTML = `
+                    【坐标平移】如图，点 A 的坐标是 (${x}, ${y})。<br>
+                    将点 A 向下平移 ${n} 个单位得到点 A'，求点 A' 的坐标。`;
+            }
+            
+            drawTransformGraph();
+            resetResult('transform');
+        }
+
+        function drawTransformGraph() {
+            const canvas = document.getElementById('transform-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            drawAxes(ctx, w, h);
+            
+            const {original} = currentTransformQuestion;
+            const px1 = w / 2 + original.x * 27;
+            const py1 = h / 2 - original.y * 27;
+            
+            // 原点
+            ctx.fillStyle = '#666';
+            ctx.font = '14px Noto Sans SC';
+            ctx.fillText('O', w / 2 - 15, h / 2 + 15);
+            
+            // 原始点 A
+            ctx.fillStyle = '#667eea';
+            ctx.beginPath();
+            ctx.arc(px1, py1, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText(`A(${original.x},${original.y})`, px1 + 10, py1 - 10);
+            
+            // 变换后的点
+            let newPx, newPy, newCoord;
+            if (currentTransformQuestion.type === 'rotate') {
+                newCoord = `(${-original.y},${original.x})`;
+                newPx = w / 2 + (-original.y) * 27;
+                newPy = h / 2 - original.x * 27;
+            } else {
+                const n = -currentTransformQuestion.translateY;
+                newCoord = `(${original.x},${original.y - n})`;
+                newPx = px1;
+                newPy = h / 2 - (original.y - n) * 27;
+            }
+            
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(newPx, newPy, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText(`A'`, newPx + 10, newPy - 10);
+            
+            // 绘制变换路径
+            ctx.strokeStyle = '#764ba2';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(px1, py1);
+            ctx.lineTo(newPx, newPy);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function checkTransformAnswer() {
+            const userAnswer = document.getElementById('transform-answer').value.replace(/\s/g, '').replace(/\(/g, '').replace(/\)/g, '');
+            const correctAnswer = currentTransformQuestion.answer.replace(/\s/g, '').replace(/\(/g, '').replace(/\)/g, '');
+            
+            const isCorrect = userAnswer === correctAnswer;
+            
+            showResult('transform', isCorrect, currentTransformQuestion.answer);
+            updateStats(isCorrect);
+        }
+
+        function showTransformHint() {
+            const hintDiv = document.getElementById('transform-hint');
+            if (currentTransformQuestion.type === 'rotate') {
+                hintDiv.innerHTML = `
+                    <strong>旋转规律：</strong><br>
+                    绕原点逆时针旋转 90°：<br>
+                    (x, y) → (-y, x)<br><br>
+                    <strong>记忆口诀：</strong><br>
+                    "x 变 y 的负，y 变 x 的正"<br><br>
+                    <strong>推广：</strong><br>
+                    旋转 180°：(x, y) → (-x, -y)<br>
+                    旋转 270°：(x, y) → (y, -x)`;
+            } else {
+                hintDiv.innerHTML = `
+                    <strong>平移规律：</strong><br>
+                    向右平移 a 个单位：(x, y) → (x+a, y)<br>
+                    向左平移 a 个单位：(x, y) → (x-a, y)<br>
+                    向上平移 b 个单位：(x, y) → (x, y+b)<br>
+                    向下平移 b 个单位：(x, y) → (x, y-b)<br><br>
+                    <strong>记忆：</strong>"左减右加，上加下减"`;
+            }
             hintDiv.style.display = 'block';
         }
 
-        // 更新统计
-        function updateStats() {
+        // ==================== 二次函数模块（新增）====================
+        function generateQuadraticQuestion() {
+            // 随机生成二次函数 y = ax² + bx + c 的参数
+            const a = Math.random() > 0.5 ? 1 : -1;
+            const vertexX = Math.floor(Math.random() * 5) - 2; // -2 到 2
+            const c = Math.floor(Math.random() * 5) - 2; // y 轴截距
+            
+            // 根据顶点式 y = a(x-h)² + k，转化为一般式
+            // 顶点 (h, k)，这里 h = vertexX
+            const k = a * (0 - vertexX) * (0 - vertexX) + c; // 顶点 y 坐标
+            const b = -2 * a * vertexX; // 展开 ax² - 2ahx + ah² + k
+            
+            currentQuadraticQuestion = {
+                a, b, c,
+                vertexX,
+                vertexY: k,
+                answer: Math.floor(Math.random() * 5) + 1 // 正确结论编号
+            };
+            
+            // 生成题目
+            const questions = [
+                {
+                    text: `【二次函数性质】如图，二次函数 y = ${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} 的图像。<br>
+                        对称轴为 x = ${vertexX}，与 y 轴交于点 (0, ${c})。<br><br>
+                        下列结论正确的是：`,
+                    options: [
+                        `abc > 0`,
+                        `b² - 4ac > 0`,
+                        `a + b + c > 0`,
+                        `当 x > ${vertexX} 时，y 随 x 增大而${a > 0 ? '增大' : '减小'}`
+                    ],
+                    correct: a > 0 ? 2 : 3
+                },
+                {
+                    text: `【二次函数图像】二次函数 y = ax² + bx + c 的图像如图所示。<br>
+                        对称轴是直线 x = 1，与 x 轴的一个交点是 (3, 0)。<br><br>
+                        下列结论中，正确的个数是：<br>
+                        ① abc < 0  ② b = 2a  ③ 4a + 2b + c > 0`,
+                    options: [`0个`, `1个`, `2个`, `3个`],
+                    correct: 2
+                }
+            ];
+            
+            const q = questions[Math.floor(Math.random() * questions.length)];
+            currentQuadraticQuestion.correct = q.correct;
+            currentQuadraticQuestion.options = q.options;
+            
+            document.getElementById('quadratic-question').innerHTML = q.text;
+            
+            // 生成选项
+            const optionsDiv = document.getElementById('quadratic-options');
+            optionsDiv.innerHTML = q.options.map((opt, i) => 
+                `<div class="option" onclick="selectQuadraticOption(${i})" id="q-opt-${i}">${String.fromCharCode(65 + i)}. ${opt}</div>`
+            ).join('');
+            
+            drawQuadraticGraph();
+            resetResult('quadratic');
+            selectedQuadraticOption = -1;
+            
+            // 重置选项样式
+            document.querySelectorAll('#quadratic-options .option').forEach(opt => {
+                opt.classList.remove('selected', 'correct-answer', 'wrong-answer');
+            });
+        }
+
+        function drawQuadraticGraph() {
+            const canvas = document.getElementById('quadratic-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            drawAxes(ctx, w, h);
+            
+            // 绘制一个示例抛物线
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            for (let px = 40; px <= w - 40; px++) {
+                const x = (px - w / 2) / 30;
+                const y = x * x - 2; // 示例抛物线
+                const py = h / 2 - y * 25;
+                
+                if (py >= 40 && py <= h - 40) {
+                    if (px === 40) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+            }
+            ctx.stroke();
+            
+            // 标记对称轴
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(w / 2, 40);
+            ctx.lineTo(w / 2, h - 40);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#e74c3c';
+            ctx.font = '12px Noto Sans SC';
+            ctx.fillText('对称轴', w / 2 + 10, 60);
+        }
+
+        let selectedQuadraticOption = -1;
+        
+        function selectQuadraticOption(index) {
+            selectedQuadraticOption = index;
+            document.querySelectorAll('#quadratic-options .option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) opt.classList.add('selected');
+            });
+        }
+
+        function checkQuadraticAnswer() {
+            if (selectedQuadraticOption === -1) {
+                document.getElementById('quadratic-result').className = 'result wrong';
+                document.getElementById('quadratic-result').textContent = '请先选择一个选项！';
+                return;
+            }
+            
+            const isCorrect = selectedQuadraticOption === currentQuadraticQuestion.correct;
+            const correctText = currentQuadraticQuestion.options[currentQuadraticQuestion.correct];
+            
+            // 显示正确答案
+            document.querySelectorAll('#quadratic-options .option').forEach((opt, i) => {
+                if (i === currentQuadraticQuestion.correct) {
+                    opt.classList.add('correct-answer');
+                } else if (i === selectedQuadraticOption && !isCorrect) {
+                    opt.classList.add('wrong-answer');
+                }
+            });
+            
+            showResult('quadratic', isCorrect, String.fromCharCode(65 + currentQuadraticQuestion.correct) + '. ' + correctText);
+            updateStats(isCorrect);
+            selectedQuadraticOption = -1;
+        }
+
+        function showQuadraticHint() {
+            document.getElementById('quadratic-hint').innerHTML = `
+                <strong>二次函数关键性质：</strong><br>
+                1. 开口方向：a > 0 向上，a < 0 向下<br>
+                2. 对称轴：x = -b/(2a)<br>
+                3. 顶点坐标：(-b/(2a), (4ac-b²)/(4a))<br>
+                4. 与 y 轴交点：(0, c)<br>
+                5. 判别式 Δ = b² - 4ac：<br>
+                   &nbsp;&nbsp;• Δ > 0：与 x 轴有两个交点<br>
+                   &nbsp;&nbsp;• Δ = 0：与 x 轴有一个交点<br>
+                   &nbsp;&nbsp;• Δ < 0：与 x 轴无交点<br><br>
+                <strong>技巧：</strong><br>
+                • 看 a 的符号判断开口<br>
+                • 看 c 的符号判断 y 截距<br>
+                • 用对称轴公式判断 b 与 a 的关系`;
+            document.getElementById('quadratic-hint').style.display = 'block';
+        }
+
+        // ==================== 方程根模块（新增）====================
+        function generateEquationQuestion() {
+            const types = ['vieta_sum', 'vieta_product', 'expression'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            // 生成一元二次方程 x² + bx + c = 0
+            const x1 = Math.floor(Math.random() * 9) + 1;
+            const x2 = Math.floor(Math.random() * 9) + 1;
+            const b = -(x1 + x2);
+            const c = x1 * x2;
+            
+            if (type === 'vieta_sum') {
+                currentEquationQuestion = {
+                    type: 'vieta_sum',
+                    equation: `x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`,
+                    answer: `${x1 + x2}`,
+                    x1, x2
+                };
+                
+                document.getElementById('equation-question').innerHTML = `
+                    【根与系数】若 x₁、x₂ 是一元二次方程 ${currentEquationQuestion.equation} 的两根，<br>
+                    则 x₁ + x₂ 的值是______。`;
+            } else if (type === 'vieta_product') {
+                currentEquationQuestion = {
+                    type: 'vieta_product',
+                    equation: `x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0`,
+                    answer: `${x1 * x2}`,
+                    x1, x2
+                };
+                
+                document.getElementById('equation-question').innerHTML = `
+                    【根与系数】若 x₁、x₂ 是一元二次方程 ${currentEquationQuestion.equation} 的两根，<br>
+                    则 x₁ · x₂ 的值是______。`;
+            } else {
+                // 表达式求值：如 (x₁ - 2)(x₂ - 2)
+                currentEquationQuestion = {
+                    type: 'expression',
+                    equation: `x² - 7x + 5 = 0`,
+                    expression: '(x₁ - 2)(x₂ - 2)',
+                    answer: `${x1 * x2 - 2 * (x1 + x2) + 4}`,
+                    // 使用固定的方程
+                    sum: 7,
+                    product: 5
+                };
+                
+                // 重新计算
+                const sum = 7, product = 5;
+                const result = product - 2 * sum + 4;
+                
+                currentEquationQuestion = {
+                    type: 'expression',
+                    equation: `x² - 7x + 5 = 0`,
+                    expression: '(x₁ - 2)(x₂ - 2)',
+                    answer: `${result}`,
+                    sum, product
+                };
+                
+                document.getElementById('equation-question').innerHTML = `
+                    【根与系数】若 x₁、x₂ 是一元二次方程 ${currentEquationQuestion.equation} 的两根，<br>
+                    则 (x₁ - 2)(x₂ - 2) 的值是______。`;
+            }
+            
+            resetResult('equation');
+        }
+
+        function checkEquationAnswer() {
+            const userAnswer = document.getElementById('equation-answer').value.replace(/\s/g, '');
+            const correctAnswer = currentEquationQuestion.answer;
+            
+            const isCorrect = userAnswer === correctAnswer;
+            
+            showResult('equation', isCorrect, currentEquationQuestion.answer);
+            updateStats(isCorrect);
+        }
+
+        function showEquationHint() {
+            const hintDiv = document.getElementById('equation-hint');
+            
+            if (currentEquationQuestion.type === 'vieta_sum') {
+                hintDiv.innerHTML = `
+                    <strong>韦达定理：</strong><br>
+                    对于方程 ax² + bx + c = 0 (a ≠ 0)：<br>
+                    x₁ + x₂ = -b/a<br>
+                    x₁ · x₂ = c/a<br><br>
+                    <strong>本题：</strong><br>
+                    方程是 x² + bx + c = 0<br>
+                    所以 x₁ + x₂ = -b`;
+            } else if (currentEquationQuestion.type === 'vieta_product') {
+                hintDiv.innerHTML = `
+                    <strong>韦达定理：</strong><br>
+                    对于方程 ax² + bx + c = 0 (a ≠ 0)：<br>
+                    x₁ + x₂ = -b/a<br>
+                    x₁ · x₂ = c/a<br><br>
+                    <strong>本题：</strong><br>
+                    方程是 x² + bx + c = 0<br>
+                    所以 x₁ · x₂ = c`;
+            } else {
+                hintDiv.innerHTML = `
+                    <strong>展开并利用韦达定理：</strong><br>
+                    (x₁ - 2)(x₂ - 2)<br>
+                    = x₁x₂ - 2x₁ - 2x₂ + 4<br>
+                    = x₁x₂ - 2(x₁ + x₂) + 4<br><br>
+                    <strong>代入韦达定理：</strong><br>
+                    x₁ + x₂ = 7<br>
+                    x₁ · x₂ = 5<br><br>
+                    原式 = 5 - 2×7 + 4 = -5<br><br>
+                    <strong>技巧：</strong>将表达式展开为 x₁+x₂ 和 x₁·x₂ 的组合`;
+            }
+            hintDiv.style.display = 'block';
+        }
+
+        // ==================== 不等式模块（新增）====================
+        function generateInequalityQuestion() {
+            // 随机生成不等式组
+            const a1 = Math.floor(Math.random() * 5) + 1;
+            const b1 = Math.floor(Math.random() * 10) - 5;
+            const c1 = a1 * 2 + b1; // 解为 x > 2
+            
+            const a2 = Math.floor(Math.random() * 5) + 1;
+            const b2 = Math.floor(Math.random() * 10) - 5;
+            const c2 = a2 * 5 + b2; // 解为 x < 5
+            
+            currentInequalityQuestion = {
+                ineq1: `${a1}x ${b1 >= 0 ? '+' : ''}${b1} > ${c1}`,
+                ineq2: `${a2}x ${b2 >= 0 ? '+' : ''}${b2} < ${c2}`,
+                answer: '2<x<5',
+                sol1: 2,
+                sol2: 5
+            };
+            
+            document.getElementById('inequality-question').innerHTML = `
+                【不等式组求解】解不等式组：<br>
+                <div style="margin: 15px 0; padding: 10px; background: #f0f4ff; border-radius: 8px;">
+                { ${a1}x ${b1 >= 0 ? '+' : ''}${b1} > ${c1}<br>
+                &nbsp;&nbsp;${a2}x ${b2 >= 0 ? '+' : ''}${b2} < ${c2}
+                </div>
+                并写出解集。`;
+            
+            resetResult('inequality');
+        }
+
+        function checkInequalityAnswer() {
+            const userAnswer = document.getElementById('inequality-answer').value.replace(/\s/g, '');
+            const correctAnswer = currentInequalityQuestion.answer;
+            
+            // 多种答案格式
+            const correctFormats = [
+                correctAnswer,
+                '2<x<5',
+                '5>x>2',
+                '(2,5)',
+                'x>2且x<5'
+            ];
+            
+            const isCorrect = correctFormats.includes(userAnswer);
+            
+            showResult('inequality', isCorrect, currentInequalityQuestion.answer);
+            updateStats(isCorrect);
+        }
+
+        function showInequalityHint() {
+            document.getElementById('inequality-hint').innerHTML = `
+                <strong>解题步骤：</strong><br>
+                1. 分别解两个不等式<br>
+                2. 找出两个解集的公共部分<br><br>
+                <strong>口诀：</strong><br>
+                "同大取大，同小取小<br>
+                大小小大中间找<br>
+                大大小小找不到"<br><br>
+                <strong>示例：</strong><br>
+                x > 2 且 x < 5 → 2 < x < 5<br>
+                x > 3 且 x > 1 → x > 3<br>
+                x < 2 且 x > 5 → 无解`;
+            document.getElementById('inequality-hint').style.display = 'block';
+        }
+
+        // ==================== 辅助函数 ====================
+        function drawAxes(ctx, w, h) {
+            const padding = 40;
+            
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            // x 轴
+            ctx.beginPath();
+            ctx.moveTo(padding, h / 2);
+            ctx.lineTo(w - padding, h / 2);
+            ctx.stroke();
+            
+            // y 轴
+            ctx.beginPath();
+            ctx.moveTo(w / 2, padding);
+            ctx.lineTo(w / 2, h - padding);
+            ctx.stroke();
+            
+            // 刻度和数字
+            ctx.fillStyle = '#666';
+            ctx.font = '12px Noto Sans SC';
+            ctx.textAlign = 'center';
+            
+            for (let i = -5; i <= 5; i++) {
+                if (i !== 0) {
+                    const x = w / 2 + i * 27;
+                    ctx.beginPath();
+                    ctx.moveTo(x, h / 2 - 5);
+                    ctx.lineTo(x, h / 2 + 5);
+                    ctx.stroke();
+                    ctx.fillText(i.toString(), x, h / 2 + 20);
+                }
+            }
+            
+            ctx.textAlign = 'right';
+            for (let i = -5; i <= 5; i++) {
+                if (i !== 0) {
+                    const y = h / 2 - i * 27;
+                    ctx.beginPath();
+                    ctx.moveTo(w / 2 - 5, y);
+                    ctx.lineTo(w / 2 + 5, y);
+                    ctx.stroke();
+                    ctx.fillText(i.toString(), w / 2 - 10, y + 4);
+                }
+            }
+        }
+
+        function drawPoints(ctx, points, w, h) {
+            ctx.fillStyle = '#764ba2';
+            points.forEach((point, i) => {
+                const px = w / 2 + point.x * 27;
+                const py = h / 2 - point.y * 27;
+                
+                ctx.beginPath();
+                ctx.arc(px, py, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Noto Sans SC';
+                ctx.fillText(i === 0 ? 'A' : 'B', px + 10, py - 10);
+                ctx.fillStyle = '#764ba2';
+            });
+        }
+
+        function drawArrow(ctx, x, y, direction) {
+            ctx.beginPath();
+            if (direction === 'up') {
+                ctx.moveTo(x - 6, y + 10);
+                ctx.lineTo(x, y);
+                ctx.lineTo(x + 6, y + 10);
+            }
+            ctx.stroke();
+        }
+
+        function showResult(type, isCorrect, correctAnswer) {
+            const resultDiv = document.getElementById(`${type}-result`);
+            resultDiv.className = 'result ' + (isCorrect ? 'correct' : 'wrong');
+            resultDiv.textContent = isCorrect ? '✓ 回答正确！' : `✗ 答案错误。正确答案是：${correctAnswer}`;
+            
+            // 如果错误，显示知识点讲解
+            if (!isCorrect) {
+                showFeedback(type);
+            } else {
+                document.getElementById(`${type}-feedback`).classList.remove('show');
+            }
+        }
+
+        // 显示详细知识点讲解
+        function showFeedback(type) {
+            const feedbackDiv = document.getElementById(`${type}-feedback`);
+            let content = '';
+            
+            switch(type) {
+                case 'function':
+                    content = getFunctionFeedback();
+                    break;
+                case 'moving':
+                    content = getMovingFeedback();
+                    break;
+                case 'transform':
+                    content = getTransformFeedback();
+                    break;
+                case 'quadratic':
+                    content = getQuadraticFeedback();
+                    break;
+                case 'equation':
+                    content = getEquationFeedback();
+                    break;
+                case 'inequality':
+                    content = getInequalityFeedback();
+                    break;
+                case 'probability':
+                    content = getProbabilityFeedback();
+                    break;
+                case 'geometry':
+                    content = getGeometryFeedback();
+                    break;
+            }
+            
+            feedbackDiv.innerHTML = content;
+            feedbackDiv.classList.add('show');
+        }
+
+        // 函数图像知识点讲解
+        function getFunctionFeedback() {
+            if (currentFunctionQuestion.type === 'linear') {
+                return `
+                    <div class="feedback-title">📚 一次函数知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>一次函数表达式：</strong>y = kx + b</p>
+                        <p>• k 叫做斜率（决定直线的倾斜程度）</p>
+                        <p>• b 叫做截距（直线与y轴的交点）</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>想象你在画一条直线：</p>
+                        <p>• <strong>k</strong> 就像坡度，k 越大坡越陡</p>
+                        <p>• <strong>b</strong> 就像起点高度，b 是你从 y 轴哪个高度开始画</p>
+                        <p>• 如果知道直线上两个点，就能求出 k 和 b</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>方法1（两点式）：</strong>k = (y₂-y₁) / (x₂-x₁)<br>
+                        <strong>方法2（代入法）：</strong>把两个点代入 y=kx+b，解方程组<br><br>
+                        <strong>记忆口诀：</strong>"两点定一直线，先求k再求b"
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🔄 举一反三</h4>
+                        <p>• 如果 k > 0，直线从左下到右上（递增）</p>
+                        <p>• 如果 k < 0，直线从左上到右下（递减）</p>
+                        <p>• 如果 b = 0，直线过原点（正比例函数）</p>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="feedback-title">📚 反比例函数知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>反比例函数表达式：</strong>y = k/x</p>
+                        <p>• k 叫做比例系数</p>
+                        <p>• 图像是双曲线，分布在两个象限</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>想象 k 是"总面积"：</p>
+                        <p>• 横坐标 x 越大，纵坐标 y 就越小（反比关系）</p>
+                        <p>• x × y = k（就像长方形面积不变）</p>
+                        <p>• 双曲线永远不会碰到坐标轴</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>关键公式：</strong>k = x × y（横坐标乘纵坐标）<br><br>
+                        <strong>记忆口诀：</strong>"一点定k值，k正一三象限，k负二四象限"
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🔄 举一反三</h4>
+                        <p>• k > 0：图像在一、三象限</p>
+                        <p>• k < 0：图像在二、四象限</p>
+                        <p>• |k| 越大，曲线离原点越远</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 动点问题知识点讲解
+        function getMovingFeedback() {
+            return `
+                <div class="feedback-title">📚 动点与面积知识点讲解</div>
+                
+                <div class="knowledge-section">
+                    <h4>🎯 核心知识点</h4>
+                    <p><strong>动点问题三要素：</strong></p>
+                    <p>1. 变量 t（时间）</p>
+                    <p>2. 几何量（边长、面积等）</p>
+                    <p>3. 函数关系式 S = f(t)</p>
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>💡 通俗理解</h4>
+                    <p>想象一个点在移动：</p>
+                    <p>• 随着时间 t 变化，点的位置在变</p>
+                    <p>• 点的位置变了，形成的三角形面积也在变</p>
+                    <p>• 我们要找出面积 S 和时间 t 的关系</p>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>⚡ 快速掌握技巧：</strong><br>
+                    <strong>解题四步法：</strong><br>
+                    1. 找底：哪个边是不变的（如 AB）<br>
+                    2. 找高：哪个边随时间变化（如 BQ）<br>
+                    3. 列式：S = ½ × 底 × 高<br>
+                    4. 定义域：确定 t 的取值范围<br><br>
+                    <strong>记忆口诀：</strong>"底不变，高随t，面积公式代进去"
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>🔄 举一反三</h4>
+                    <p>• 矩形动点：S = ½ × 宽 × 速度t</p>
+                    <p>• 三角形动点：用底×高÷2</p>
+                    <p>• 注意：动点走到顶时 t 有最大值</p>
+                </div>
+            `;
+        }
+
+        // 坐标变换知识点讲解
+        function getTransformFeedback() {
+            if (currentTransformQuestion.type === 'rotate') {
+                return `
+                    <div class="feedback-title">📚 坐标旋转知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>绕原点旋转 90° 的坐标变化：</strong></p>
+                        <p>• 逆时针 90°：(x, y) → (-y, x)</p>
+                        <p>• 顺时针 90°：(x, y) → (y, -x)</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>想象你站在原点：</p>
+                        <p>• 逆时针转 90°，原来的 x 方向变成 y 方向</p>
+                        <p>• 原来的 y 方向变成负 x 方向</p>
+                        <p>• 就像向左转，前后变成左右</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>记忆口诀：</strong>"逆时针，x变y的负，y变x"<br><br>
+                        <strong>图示记忆：</strong><br>
+                        &nbsp;&nbsp;y↑<br>
+                        &nbsp;&nbsp;|<br>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;(x,y) → (-y,x)<br>
+                        ————→x<br><br>
+                        <strong>推广：</strong><br>
+                        • 旋转 180°：(x, y) → (-x, -y)<br>
+                        • 旋转 270°：(x, y) → (y, -x)
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="feedback-title">📚 坐标平移知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>平移规律：</strong></p>
+                        <p>• 向右平移 a：(x, y) → (x+a, y)</p>
+                        <p>• 向左平移 a：(x, y) → (x-a, y)</p>
+                        <p>• 向上平移 b：(x, y) → (x, y+b)</p>
+                        <p>• 向下平移 b：(x, y) → (x, y-b)</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>想象你在移动一个点：</p>
+                        <p>• 向右/左移动，只改变 x 坐标</p>
+                        <p>• 向上/下移动，只改变 y 坐标</p>
+                        <p>• 就像在方格纸上移动棋子</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>记忆口诀：</strong>"左减右加，上加下减"<br><br>
+                        <strong>理解：</strong><br>
+                        • 向右走 → x 增大 → 加<br>
+                        • 向左走 → x 减小 → 减<br>
+                        • 向上走 → y 增大 → 加<br>
+                        • 向下走 → y 减小 → 减
+                    </div>
+                `;
+            }
+        }
+
+        // 二次函数知识点讲解
+        function getQuadraticFeedback() {
+            return `
+                <div class="feedback-title">📚 二次函数性质知识点讲解</div>
+                
+                <div class="knowledge-section">
+                    <h4>🎯 核心知识点</h4>
+                    <p><strong>二次函数：</strong>y = ax² + bx + c</p>
+                    <p>• a 决定开口方向：a>0 向上，a<0 向下</p>
+                    <p>• 对称轴：x = -b/(2a)</p>
+                    <p>• 顶点坐标：(-b/(2a), (4ac-b²)/(4a))</p>
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>💡 通俗理解</h4>
+                    <p>想象一个抛物线：</p>
+                    <p>• a 像碗的形状：a>0 碗口向上，a<0 碗口向下</p>
+                    <p>• 对称轴像中轴线，两边对称</p>
+                    <p>• c 是抛物线与 y 轴的交点高度</p>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>⚡ 快速判断技巧：</strong><br>
+                    <strong>看图判断：</strong><br>
+                    1. 开口方向 → 看 a（向上为正）<br>
+                    2. y 截距 → 看 c（与 y 轴交点）<br>
+                    3. 对称轴 → 看 b 和 a 的关系<br>
+                    4. 与 x 轴交点 → 看判别式 Δ=b²-4ac<br><br>
+                    <strong>记忆：</strong>"a看开口，c看截距，b看对称轴位置"
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>🔄 常考结论</h4>
+                    <p>• abc > 0：a、b、c 同号</p>
+                    <p>• b = 2a：对称轴 x = -1</p>
+                    <p>• 4a + 2b + c：x=2 时的函数值</p>
+                </div>
+            `;
+        }
+
+        // 方程根知识点讲解
+        function getEquationFeedback() {
+            return `
+                <div class="feedback-title">📚 韦达定理知识点讲解</div>
+                
+                <div class="knowledge-section">
+                    <h4>🎯 核心知识点</h4>
+                    <p><strong>韦达定理：</strong>对于方程 ax² + bx + c = 0</p>
+                    <p>• x₁ + x₂ = -b/a（两根之和）</p>
+                    <p>• x₁ × x₂ = c/a（两根之积）</p>
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>💡 通俗理解</h4>
+                    <p>韦达定理告诉你：</p>
+                    <p>• 不用解方程，就能知道两根的和与积</p>
+                    <p>• 和 = -一次项系数/二次项系数</p>
+                    <p>• 积 = 常数项/二次项系数</p>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>⚡ 快速掌握技巧：</strong><br>
+                    <strong>记忆口诀：</strong>"和负b，积c，分母都是a"<br><br>
+                    <strong>表达式求值技巧：</strong><br>
+                    1. 把表达式展开成 x₁+x₂ 和 x₁×x₂ 的组合<br>
+                    2. 代入韦达定理的值<br>
+                    3. 计算结果<br><br>
+                    <strong>例：</strong>(x₁-2)(x₂-2) = x₁x₂ - 2(x₁+x₂) + 4
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>🔄 常考变形</h4>
+                    <p>• x₁² + x₂² = (x₁+x₂)² - 2x₁x₂</p>
+                    <p>• 1/x₁ + 1/x₂ = (x₁+x₂)/(x₁x₂)</p>
+                    <p>• |x₁ - x₂| = √[(x₁+x₂)² - 4x₁x₂]</p>
+                </div>
+            `;
+        }
+
+        // 不等式知识点讲解
+        function getInequalityFeedback() {
+            return `
+                <div class="feedback-title">📚 不等式组知识点讲解</div>
+                
+                <div class="knowledge-section">
+                    <h4>🎯 核心知识点</h4>
+                    <p><strong>不等式组求解：</strong></p>
+                    <p>• 分别解每个不等式</p>
+                    <p>• 找公共部分（两个解集都满足的范围）</p>
+                </div>
+                
+                <div class="knowledge-section">
+                    <h4>💡 通俗理解</h4>
+                    <p>想象两个条件：</p>
+                    <p>• x > 2 意思是 x 在 2 的右边</p>
+                    <p>• x < 5 意思是 x 在 5 的左边</p>
+                    <p>• 两个条件都满足，就是 2 和 5 之间</p>
+                </div>
+                
+                <div class="tip-box">
+                    <strong>⚡ 快速掌握技巧：</strong><br>
+                    <strong>口诀：</strong>"同大取大，同小取小，大小小大中间找，大大小小找不到"<br><br>
+                    <strong>四种情况：</strong><br>
+                    • x > 2 且 x > 5 → x > 5（取大的）<br>
+                    • x < 2 且 x < 5 → x < 2（取小的）<br>
+                    • x > 2 且 x < 5 → 2 < x < 5（中间）<br>
+                    • x < 2 且 x > 5 → 无解（矛盾）<br><br>
+                    <strong>画数轴最直观！</strong>
+                </div>
+            `;
+        }
+
+        // 概率知识点讲解
+        function getProbabilityFeedback() {
+            if (currentProbabilityQuestion.type === 'tree') {
+                return `
+                    <div class="feedback-title">📚 树状图概率知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>等可能事件概率：</strong></p>
+                        <p>P(A) = 有利结果数 / 所有可能结果数</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>树状图就像家谱：</p>
+                        <p>• 第一层：甲的选择（3个分支）</p>
+                        <p>• 第二层：乙的选择（每个分支下3个）</p>
+                        <p>• 总共 3×3 = 9 种可能</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>解题步骤：</strong><br>
+                        1. 画树状图（或列表）<br>
+                        2. 数总数（所有可能结果）<br>
+                        3. 数有利（满足条件的结果）<br>
+                        4. 算概率（有利/总数）<br><br>
+                        <strong>技巧：</strong>列表法比树状图更快！
+                    </div>
+                `;
+            } else if (currentProbabilityQuestion.type === 'spinner') {
+                return `
+                    <div class="feedback-title">📚 期望值知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>期望值公式：</strong></p>
+                        <p>E = Σ(值 × 概率)</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>期望值就是"平均值"：</p>
+                        <p>• 如果转很多次，平均每次能得多少</p>
+                        <p>• 把每种情况的"值×概率"加起来</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>计算方法：</strong><br>
+                        E = 45×(红色个数/12) + 30×(黄色个数/12) + 15×(绿色个数/12)<br><br>
+                        <strong>理解：</strong>期望值 = 加权平均
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="feedback-title">📚 基础概率知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>等可能事件：</strong>每个结果出现的可能性相同</p>
+                        <p>P = 1/n（n 是总数）</p>
+                    </div>
+                    
+                    <div class="knowledge-section">
+                        <h4>💡 通俗理解</h4>
+                        <p>骰子有6个面：</p>
+                        <p>• 每个面朝上的机会相等</p>
+                        <p>• 掷出某个点的概率 = 1/6</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 关键：</strong>"等可能"意味着每个结果概率相同
+                    </div>
+                `;
+            }
+        }
+
+        // 几何证明知识点讲解
+        function getGeometryFeedback() {
+            if (currentGeometryQuestion.type === 'circle') {
+                return `
+                    <div class="feedback-title">📚 圆的性质知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>圆的四大定理：</strong></p>
+                        <p>1. 圆周角定理：同弧所对圆周角相等</p>
+                        <p>2. 垂径定理：垂直于弦的直径平分弦</p>
+                        <p>3. 切线性质：切线垂直于过切点的半径</p>
+                        <p>4. 直径所对圆周角为90°</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>看到切线想到：</strong>垂直于半径<br>
+                        <strong>看到直径想到：</strong>圆周角=90°<br>
+                        <strong>看到弦和弦心距想到：</strong>垂径定理<br><br>
+                        <strong>记忆口诀：</strong>"切线⊥半径，直径对直角，垂径平分弦"
+                    </div>
+                `;
+            } else if (currentGeometryQuestion.type === 'parallelogram') {
+                return `
+                    <div class="feedback-title">📚 平行四边形判定知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>五种判定方法：</strong></p>
+                        <p>1. 两组对边分别平行</p>
+                        <p>2. 两组对边分别相等</p>
+                        <p>3. 一组对边平行且相等</p>
+                        <p>4. 对角线互相平分</p>
+                        <p>5. 两组对角分别相等</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 快速掌握技巧：</strong><br>
+                        <strong>最常用：</strong>一组对边平行且相等<br>
+                        <strong>注意：</strong>AC=BD 不能判定平行四边形<br><br>
+                        <strong>记忆口诀：</strong>"边平行、边相等、对角平分"
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="feedback-title">📚 矩形判定知识点讲解</div>
+                    
+                    <div class="knowledge-section">
+                        <h4>🎯 核心知识点</h4>
+                        <p><strong>三种判定方法：</strong></p>
+                        <p>1. 有一个角是直角的平行四边形</p>
+                        <p>2. 对角线相等的平行四边形</p>
+                        <p>3. 四个角都是直角的四边形</p>
+                    </div>
+                    
+                    <div class="tip-box">
+                        <strong>⚡ 关键区别：</strong><br>
+                        • 矩形：对角线相等<br>
+                        • 菱形：对角线垂直<br>
+                        • 正方形：既相等又垂直<br><br>
+                        <strong>记忆：</strong>"矩形等，菱形垂，正方形都具备"
+                    </div>
+                `;
+            }
+        }
+
+        function resetResult(type) {
+            const answerInput = document.getElementById(`${type}-answer`);
+            if (answerInput) answerInput.value = '';
+            
+            const resultDiv = document.getElementById(`${type}-result`);
+            if (resultDiv) {
+                resultDiv.className = 'result';
+                resultDiv.textContent = '';
+            }
+            
+            const hintDiv = document.getElementById(`${type}-hint`);
+            if (hintDiv) hintDiv.style.display = 'none';
+            
+            const feedbackDiv = document.getElementById(`${type}-feedback`);
+            if (feedbackDiv) feedbackDiv.classList.remove('show');
+        }
+
+        function updateStats(isCorrect) {
+            if (isCorrect) correctCount++;
+            else wrongCount++;
+            
             document.getElementById('correct-count').textContent = correctCount;
             document.getElementById('wrong-count').textContent = wrongCount;
             
             const total = correctCount + wrongCount;
-            const accuracy = total > 0 ? Math.round(correctCount / total * 100) : 0;
-            document.getElementById('accuracy').textContent = accuracy + '%';
+            document.getElementById('accuracy').textContent = (total > 0 ? Math.round(correctCount / total * 100) : 0) + '%';
         }
 
-        // 页面加载时生成第一题
+        function simplifyAnswer(answer) {
+            return answer.replace(/y=/g, '').replace(/\s/g, '').replace(/\+\-/g, '-');
+        }
+
+        // ==================== 概率模块（新增）====================
+        let currentProbabilityQuestion = null;
+
+        function generateProbabilityQuestion() {
+            const types = ['tree', 'spinner', 'dice'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            if (type === 'tree') {
+                // 树状图概率（对应试卷17题）
+                const aChoices = ['A', 'B', 'C'];
+                const bChoices = ['B', 'C', 'D'];
+                const commonChoices = aChoices.filter(c => bChoices.includes(c)); // B, C
+                
+                currentProbabilityQuestion = {
+                    type: 'tree',
+                    aChoices: aChoices,
+                    bChoices: bChoices,
+                    total: 9,
+                    favorable: commonChoices.length,
+                    answer: `${commonChoices.length}/9`,
+                    commonChoices: commonChoices
+                };
+                
+                document.getElementById('probability-question').innerHTML = `
+                    【树状图概率】甲同学从 A、B、C 三类书籍中随机选择一种，乙同学从 B、C、D 三类书籍中随机选择一种。<br>
+                    用树状图或列表法，求甲乙两位同学选择相同类别书籍的概率。`;
+                
+                drawTreeDiagram();
+            } else if (type === 'spinner') {
+                // 转盘概率（对应试卷7题）
+                const red = Math.floor(Math.random() * 3) + 1;
+                const yellow = Math.floor(Math.random() * 3) + 1;
+                const green = Math.floor(Math.random() * 3) + 1;
+                const total = 12;
+                
+                const expectedValue = (red * 45 + yellow * 30 + green * 15) / total;
+                
+                currentProbabilityQuestion = {
+                    type: 'spinner',
+                    red, yellow, green, total,
+                    answer: expectedValue.toFixed(2),
+                    expectedValue
+                };
+                
+                document.getElementById('probability-question').innerHTML = `
+                    【转盘期望】转盘等分成12个扇形，其中红色${red}个、黄色${yellow}个、绿色${green}个。<br>
+                    转动一次，指针指向红色得45元、黄色得30元、绿色得15元。<br>
+                    求获得购物券金额的期望值（平均数）。`;
+                
+                drawSpinner();
+            } else {
+                // 骰子概率
+                const target = Math.floor(Math.random() * 6) + 1;
+                const favorable = 1;
+                const total = 6;
+                
+                currentProbabilityQuestion = {
+                    type: 'dice',
+                    target,
+                    answer: '1/6',
+                    favorable,
+                    total
+                };
+                
+                document.getElementById('probability-question').innerHTML = `
+                    【骰子概率】掷一枚质地均匀的骰子一次，求点数为 ${target} 的概率。`;
+                
+                drawDice(target);
+            }
+            
+            resetResult('probability');
+        }
+
+        function drawTreeDiagram() {
+            const canvas = document.getElementById('probability-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            ctx.fillStyle = '#666';
+            ctx.font = '14px Noto Sans SC';
+            
+            // 起点
+            ctx.beginPath();
+            ctx.arc(40, h/2, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 甲的分支
+            const aChoices = ['A', 'B', 'C'];
+            aChoices.forEach((choice, i) => {
+                const x1 = 100, y1 = 40 + i * 50;
+                
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(48, h/2);
+                ctx.lineTo(x1 - 20, y1);
+                ctx.stroke();
+                
+                ctx.fillStyle = '#667eea';
+                ctx.beginPath();
+                ctx.arc(x1, y1, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#333';
+                ctx.fillText(choice, x1 + 15, y1 + 5);
+                
+                // 乙的分支
+                const bChoices = ['B', 'C', 'D'];
+                bChoices.forEach((bChoice, j) => {
+                    const x2 = 200, y2 = y1 - 25 + j * 25;
+                    
+                    ctx.strokeStyle = '#764ba2';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(x1 + 6, y1);
+                    ctx.lineTo(x2 - 20, y2);
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#764ba2';
+                    ctx.beginPath();
+                    ctx.arc(x2, y2, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#666';
+                    ctx.font = '12px Noto Sans SC';
+                    ctx.fillText(bChoice, x2 + 10, y2 + 4);
+                });
+            });
+            
+            // 标签
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Noto Sans SC';
+            ctx.fillText('甲', 60, h/2 - 15);
+            ctx.fillText('乙', 160, 20);
+        }
+
+        function drawSpinner() {
+            const canvas = document.getElementById('probability-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            const {red, yellow, green} = currentProbabilityQuestion;
+            const centerX = w / 2, centerY = h / 2;
+            const radius = 70;
+            
+            const colors = ['#e74c3c', '#f39c12', '#27ae60'];
+            const counts = [red, yellow, green];
+            const labels = ['红', '黄', '绿'];
+            
+            let startAngle = -Math.PI / 2;
+            
+            counts.forEach((count, i) => {
+                const sliceAngle = (count / 12) * Math.PI * 2;
+                
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[i];
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // 标签
+                const midAngle = startAngle + sliceAngle / 2;
+                const labelX = centerX + Math.cos(midAngle) * (radius * 0.6);
+                const labelY = centerY + Math.sin(midAngle) * (radius * 0.6);
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = '14px Noto Sans SC';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[i], labelX, labelY + 5);
+                
+                startAngle += sliceAngle;
+            });
+            
+            // 指针
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY - radius - 15);
+            ctx.lineTo(centerX - 8, centerY - radius + 5);
+            ctx.lineTo(centerX + 8, centerY - radius + 5);
+            ctx.closePath();
+            ctx.fillStyle = '#333';
+            ctx.fill();
+        }
+
+        function drawDice(target) {
+            const canvas = document.getElementById('probability-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            const size = 80;
+            const x = w/2 - size/2, y = h/2 - size/2;
+            
+            // 骰子外框
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(x, y, size, size);
+            
+            // 点位
+            const dotPositions = {
+                1: [[0.5, 0.5]],
+                2: [[0.25, 0.25], [0.75, 0.75]],
+                3: [[0.25, 0.25], [0.5, 0.5], [0.75, 0.75]],
+                4: [[0.25, 0.25], [0.75, 0.25], [0.25, 0.75], [0.75, 0.75]],
+                5: [[0.25, 0.25], [0.75, 0.25], [0.5, 0.5], [0.25, 0.75], [0.75, 0.75]],
+                6: [[0.25, 0.25], [0.75, 0.25], [0.25, 0.5], [0.75, 0.5], [0.25, 0.75], [0.75, 0.75]]
+            };
+            
+            ctx.fillStyle = '#333';
+            dotPositions[target].forEach(pos => {
+                ctx.beginPath();
+                ctx.arc(x + pos[0] * size, y + pos[1] * size, 6, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function checkProbabilityAnswer() {
+            const userAnswer = document.getElementById('probability-answer').value.replace(/\s/g, '');
+            const correctAnswer = currentProbabilityQuestion.answer;
+            
+            // 多种格式判断
+            let isCorrect = userAnswer === correctAnswer;
+            
+            if (currentProbabilityQuestion.type === 'tree') {
+                isCorrect = isCorrect || userAnswer === `${currentProbabilityQuestion.favorable}/9`;
+            } else if (currentProbabilityQuestion.type === 'spinner') {
+                isCorrect = isCorrect || Math.abs(parseFloat(userAnswer) - currentProbabilityQuestion.expectedValue) < 0.01;
+            }
+            
+            showResult('probability', isCorrect, currentProbabilityQuestion.answer);
+            updateStats(isCorrect);
+        }
+
+        function showProbabilityHint() {
+            const hintDiv = document.getElementById('probability-hint');
+            
+            if (currentProbabilityQuestion.type === 'tree') {
+                hintDiv.innerHTML = `
+                    <strong>解题步骤：</strong><br>
+                    1. 画树状图：甲有3个分支(A,B,C)，每个分支下乙有3个分支(B,C,D)<br>
+                    2. 共有 3×3 = 9 种等可能结果<br>
+                    3. 找出相同类别：(A,B), (A,C), (A,D)<br>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       (B,B), (B,C), (B,D)<br>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       (C,B), (C,C), (C,D)<br>
+                    4. 相同类别：(B,B), (C,C) 共2种<br>
+                    5. 概率 = 2/9<br><br>
+                    <strong>技巧：</strong>列表法更直观`;
+            } else if (currentProbabilityQuestion.type === 'spinner') {
+                const {red, yellow, green} = currentProbabilityQuestion;
+                hintDiv.innerHTML = `
+                    <strong>期望值公式：</strong><br>
+                    E = Σ(值 × 概率)<br><br>
+                    <strong>计算：</strong><br>
+                    E = 45 × ${red}/12 + 30 × ${yellow}/12 + 15 × ${green}/12<br>
+                    &nbsp;&nbsp;&nbsp;= ${45*red + 30*yellow + 15*green}/12<br>
+                    &nbsp;&nbsp;&nbsp;= ${currentProbabilityQuestion.expectedValue.toFixed(2)} 元`;
+            } else {
+                hintDiv.innerHTML = `
+                    <strong>等可能事件概率：</strong><br>
+                    P(A) = 有利结果数 / 所有可能结果数<br><br>
+                    <strong>骰子：</strong><br>
+                    • 共6个面，每个面朝上概率相等<br>
+                    • 点数为${currentProbabilityQuestion.target}只有1个面<br>
+                    • P = 1/6`;
+            }
+            hintDiv.style.display = 'block';
+        }
+
+        // ==================== 几何证明模块（新增）====================
+        let currentGeometryQuestion = null;
+        let selectedGeometryOption = -1;
+
+        function generateGeometryQuestion() {
+            const types = ['circle', 'parallelogram', 'rectangle'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            if (type === 'circle') {
+                // 圆的性质（对应试卷18题）
+                currentGeometryQuestion = {
+                    type: 'circle',
+                    question: `【圆的性质】如图，AB 是 ⊙O 的直径，弦 CD ⊥ AB 于点 E，过 B 作 ⊙O 的切线，交 AC 的延长线于 F，连接 BD。<br><br>
+                        下列结论中，正确的个数是：<br>
+                        ① ∠ABD = ∠ACD  ② BF // CD  ③ 若 AC=8, BD=6，则 CD=9.6`,
+                    options: ['0个', '1个', '2个', '3个'],
+                    correct: 3,
+                    explanation: '①同弧所对圆周角相等 ✓ ②切线⊥半径，CD⊥AB，∴CD//BF ✓ ③用垂径定理和勾股定理 ✓'
+                };
+            } else if (type === 'parallelogram') {
+                // 平行四边形（对应试卷23题）
+                currentGeometryQuestion = {
+                    type: 'parallelogram',
+                    question: `【平行四边形判定】如图，四边形 ABCD 中，AD=BC，AD//BC。<br><br>
+                        下列条件中，能判定四边形 ABCD 是平行四边形的有：<br>
+                        ① AB=CD  ② ∠A+∠B=180°  ③ AC=BD  ④ 对角线互相平分`,
+                    options: ['①②', '②③', '①②④', '①②③④'],
+                    correct: 2,
+                    explanation: '①一组对边平行且相等 ✓ ②同旁内角互补，AB//CD ✓ ④对角线互相平分 ✓ ③条件不足'
+                };
+            } else {
+                // 矩形判定
+                currentGeometryQuestion = {
+                    type: 'rectangle',
+                    question: `【矩形判定】如图，平行四边形 ABCD 中，对角线 AC、BD 交于点 O。<br><br>
+                        下列条件中，能判定 ABCD 是矩形的有：<br>
+                        ① AC=BD  ② ∠ABC=90°  ③ OA=OB=OC=OD  ④ AC⊥BD`,
+                    options: ['①②', '①②③', '①②④', '①②③④'],
+                    correct: 1,
+                    explanation: '①对角线相等的平行四边形是矩形 ✓ ②有一个角是直角的平行四边形是矩形 ✓ ③等价于AC=BD ✓ ④对角线垂直是菱形'
+                };
+            }
+            
+            document.getElementById('geometry-question').innerHTML = currentGeometryQuestion.question;
+            
+            // 生成选项
+            const optionsDiv = document.getElementById('geometry-options');
+            optionsDiv.innerHTML = currentGeometryQuestion.options.map((opt, i) => 
+                `<div class="option" onclick="selectGeometryOption(${i})" id="g-opt-${i}">${String.fromCharCode(65 + i)}. ${opt}</div>`
+            ).join('');
+            
+            drawGeometryFigure(type);
+            resetResult('geometry');
+            selectedGeometryOption = -1;
+            
+            // 重置选项样式
+            document.querySelectorAll('#geometry-options .option').forEach(opt => {
+                opt.classList.remove('selected', 'correct-answer', 'wrong-answer');
+            });
+        }
+
+        function drawGeometryFigure(type) {
+            const canvas = document.getElementById('geometry-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            if (type === 'circle') {
+                // 画圆
+                const centerX = w/2, centerY = h/2, radius = 80;
+                
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // 直径AB
+                ctx.beginPath();
+                ctx.moveTo(centerX - radius, centerY);
+                ctx.lineTo(centerX + radius, centerY);
+                ctx.stroke();
+                
+                // 弦CD
+                ctx.beginPath();
+                ctx.moveTo(centerX - 50, centerY - 60);
+                ctx.lineTo(centerX - 50, centerY + 60);
+                ctx.stroke();
+                
+                // 标注
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Noto Sans SC';
+                ctx.fillText('A', centerX - radius - 15, centerY + 5);
+                ctx.fillText('B', centerX + radius + 5, centerY + 5);
+                ctx.fillText('C', centerX - 50 - 25, centerY - 60);
+                ctx.fillText('D', centerX - 50 - 25, centerY + 65);
+                ctx.fillText('O', centerX + 5, centerY - 10);
+                ctx.fillText('E', centerX - 50 - 15, centerY - 10);
+                
+                // 圆心
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                // 画平行四边形/矩形
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                
+                ctx.beginPath();
+                ctx.moveTo(80, 180);
+                ctx.lineTo(200, 180);
+                ctx.lineTo(280, 80);
+                ctx.lineTo(160, 80);
+                ctx.closePath();
+                ctx.stroke();
+                
+                // 标注
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Noto Sans SC';
+                ctx.fillText('A', 65, 195);
+                ctx.fillText('B', 205, 195);
+                ctx.fillText('C', 285, 80);
+                ctx.fillText('D', 145, 75);
+                
+                // 对角线
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(80, 180);
+                ctx.lineTo(280, 80);
+                ctx.moveTo(200, 180);
+                ctx.lineTo(160, 80);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                ctx.fillText('O', 215, 135);
+            }
+        }
+
+        function selectGeometryOption(index) {
+            selectedGeometryOption = index;
+            document.querySelectorAll('#geometry-options .option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) opt.classList.add('selected');
+            });
+        }
+
+        function checkGeometryAnswer() {
+            if (selectedGeometryOption === -1) {
+                document.getElementById('geometry-result').className = 'result wrong';
+                document.getElementById('geometry-result').textContent = '请先选择一个选项！';
+                return;
+            }
+            
+            const isCorrect = selectedGeometryOption === currentGeometryQuestion.correct;
+            const correctText = currentGeometryQuestion.options[currentGeometryQuestion.correct];
+            
+            // 显示正确答案
+            document.querySelectorAll('#geometry-options .option').forEach((opt, i) => {
+                if (i === currentGeometryQuestion.correct) {
+                    opt.classList.add('correct-answer');
+                } else if (i === selectedGeometryOption && !isCorrect) {
+                    opt.classList.add('wrong-answer');
+                }
+            });
+            
+            showResult('geometry', isCorrect, String.fromCharCode(65 + currentGeometryQuestion.correct) + '. ' + correctText);
+            updateStats(isCorrect);
+            selectedGeometryOption = -1;
+        }
+
+        function showGeometryHint() {
+            const hintDiv = document.getElementById('geometry-hint');
+            
+            if (currentGeometryQuestion.type === 'circle') {
+                hintDiv.innerHTML = `
+                    <strong>圆的关键定理：</strong><br>
+                    1. 圆周角定理：同弧所对圆周角相等<br>
+                    2. 垂径定理：垂直于弦的直径平分弦<br>
+                    3. 切线性质：过半径外端的切线垂直于半径<br>
+                    4. 直径所对圆周角为90°<br><br>
+                    <strong>本题关键：</strong><br>
+                    • BF⊥OB（切线性质）<br>
+                    • CD⊥AB，∴ CD//BF<br>
+                    • 用勾股定理求弦长`;
+            } else if (currentGeometryQuestion.type === 'parallelogram') {
+                hintDiv.innerHTML = `
+                    <strong>平行四边形判定方法：</strong><br>
+                    1. 两组对边分别平行<br>
+                    2. 两组对边分别相等<br>
+                    3. 一组对边平行且相等<br>
+                    4. 对角线互相平分<br>
+                    5. 两组对角分别相等<br><br>
+                    <strong>注意：</strong><br>
+                    • AC=BD 不能判定平行四边形（只是对角线相等）`;
+            } else {
+                hintDiv.innerHTML = `
+                    <strong>矩形判定方法：</strong><br>
+                    1. 有一个角是直角的平行四边形<br>
+                    2. 对角线相等的平行四边形<br>
+                    3. 四个角都是直角的四边形<br><br>
+                    <strong>特殊四边形关系：</strong><br>
+                    • 矩形：对角线相等<br>
+                    • 菱形：对角线垂直<br>
+                    • 正方形：既相等又垂直`;
+            }
+            hintDiv.style.display = 'block';
+        }
+
+        // ==================== 考试模式 ====================
+        let examQuestions = [];
+        let examAnswers = [];
+        let currentExamIndex = 0;
+        let examTimer = null;
+        let examTimeLeft = 30 * 60; // 30分钟
+        let examStartTime = null;
+
+        // 开始考试
+        function startExam() {
+            if (!confirm('即将开始模拟考试（30分钟，12道题）\n开始后将无法暂停，确定开始吗？')) {
+                return;
+            }
+            
+            // 隐藏练习模式
+            document.getElementById('practice-tabs').style.display = 'none';
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+            
+            // 显示考试模式
+            document.getElementById('exam-container').classList.add('active');
+            document.querySelector('.start-exam-btn').style.display = 'none';
+            
+            // 生成考试题目
+            generateExamQuestions();
+            
+            // 重置状态
+            examAnswers = new Array(12).fill(null);
+            currentExamIndex = 0;
+            examTimeLeft = 30 * 60;
+            examStartTime = Date.now();
+            
+            // 显示第一题
+            showExamQuestion(0);
+            
+            // 开始计时
+            startExamTimer();
+        }
+
+        // 生成考试题目（12道，覆盖所有知识点）
+        function generateExamQuestions() {
+            examQuestions = [];
+            
+            // 定义题目类型及分值
+            const questionTypes = [
+                { type: 'function', name: '函数图像', count: 2, points: 8 },
+                { type: 'moving', name: '动点问题', count: 2, points: 10 },
+                { type: 'transform', name: '坐标变换', count: 1, points: 6 },
+                { type: 'quadratic', name: '二次函数', count: 2, points: 8 },
+                { type: 'equation', name: '方程根', count: 2, points: 8 },
+                { type: 'inequality', name: '不等式', count: 1, points: 6 },
+                { type: 'probability', name: '概率', count: 1, points: 6 },
+                { type: 'geometry', name: '几何证明', count: 1, points: 6 }
+            ];
+            
+            let questionIndex = 0;
+            
+            questionTypes.forEach(qt => {
+                for (let i = 0; i < qt.count; i++) {
+                    const question = generateQuestionByType(qt.type);
+                    examQuestions.push({
+                        ...question,
+                        index: questionIndex++,
+                        typeName: qt.name,
+                        points: qt.points,
+                        flagged: false
+                    });
+                }
+            });
+            
+            // 更新导航
+            updateExamNav();
+        }
+
+        // 根据类型生成题目
+        function generateQuestionByType(type) {
+            switch(type) {
+                case 'function': return generateFunctionQuestionData();
+                case 'moving': return generateMovingQuestionData();
+                case 'transform': return generateTransformQuestionData();
+                case 'quadratic': return generateQuadraticQuestionData();
+                case 'equation': return generateEquationQuestionData();
+                case 'inequality': return generateInequalityQuestionData();
+                case 'probability': return generateProbabilityQuestionData();
+                case 'geometry': return generateGeometryQuestionData();
+            }
+        }
+
+        // 各类型题目数据生成（简化版，返回数据对象）
+        function generateFunctionQuestionData() {
+            const type = Math.random() > 0.5 ? 'linear' : 'inverse';
+            if (type === 'linear') {
+                const k = (Math.floor(Math.random() * 5) + 1) * (Math.random() > 0.5 ? 1 : -1);
+                const b = (Math.floor(Math.random() * 8) + 1) * (Math.random() > 0.5 ? 1 : -1);
+                const x1 = 1, y1 = k + b;
+                const x2 = 2, y2 = 2*k + b;
+                return {
+                    type: 'function',
+                    subType: 'linear',
+                    question: `【一次函数】直线经过点 A(${x1}, ${y1}) 和 B(${x2}, ${y2})，求函数解析式。`,
+                    answer: `y=${k}x${b>=0?'+':''}${b}`,
+                    inputType: 'text',
+                    knowledgePoint: '一次函数',
+                    feedback: getFunctionFeedback()
+                };
+            } else {
+                const k = (Math.floor(Math.random() * 12) + 4) * 2;
+                const x = 2, y = k / 2;
+                return {
+                    type: 'function',
+                    subType: 'inverse',
+                    question: `【反比例函数】双曲线经过点 A(${x}, ${y})，求函数解析式。`,
+                    answer: `y=${k}/x`,
+                    inputType: 'text',
+                    knowledgePoint: '反比例函数',
+                    feedback: getFunctionFeedback()
+                };
+            }
+        }
+
+        function generateMovingQuestionData() {
+            const w = Math.floor(Math.random() * 4) + 6;
+            const h = Math.floor(Math.random() * 4) + 6;
+            const v = Math.floor(Math.random() * 3) + 1;
+            return {
+                type: 'moving',
+                question: `【动点问题】矩形ABCD，AB=${w}，BC=${h}。点P从A出发沿AD以每秒${v}单位运动，同时点Q从B出发沿BC以每秒${v}单位运动。求△PBQ面积S与时间t的关系式。`,
+                answer: `S=${w*v/2}t`,
+                inputType: 'text',
+                knowledgePoint: '动点与面积',
+                feedback: getMovingFeedback()
+            };
+        }
+
+        function generateTransformQuestionData() {
+            const x = Math.floor(Math.random() * 5) + 1;
+            const y = Math.floor(Math.random() * 5) + 1;
+            const rotation = Math.random() > 0.5;
+            if (rotation) {
+                return {
+                    type: 'transform',
+                    question: `【坐标旋转】点A坐标(${x},${y})，绕原点O逆时针旋转90°得到点A'，求A'坐标。`,
+                    answer: `(${-y},${x})`,
+                    inputType: 'text',
+                    knowledgePoint: '坐标旋转',
+                    feedback: getTransformFeedback()
+                };
+            } else {
+                const n = Math.floor(Math.random() * 4) + 2;
+                return {
+                    type: 'transform',
+                    question: `【坐标平移】点A坐标(${x},${y})，向下平移${n}个单位得到点A'，求A'坐标。`,
+                    answer: `(${x},${y-n})`,
+                    inputType: 'text',
+                    knowledgePoint: '坐标平移',
+                    feedback: getTransformFeedback()
+                };
+            }
+        }
+
+        function generateQuadraticQuestionData() {
+            const questions = [
+                {
+                    question: `【二次函数性质】二次函数y=ax²+bx+c的图像开口向下，对称轴x=1，与y轴交于正半轴。下列结论正确的是：①abc>0 ②b=2a ③a+b+c>0`,
+                    options: ['①②', '②③', '①③', '①②③'],
+                    answer: 1,
+                    inputType: 'choice'
+                },
+                {
+                    question: `【二次函数】抛物线y=x²-4x+3的顶点坐标是：`,
+                    options: ['(2,-1)', '(2,1)', '(-2,-1)', '(-2,1)'],
+                    answer: 0,
+                    inputType: 'choice'
+                }
+            ];
+            const q = questions[Math.floor(Math.random() * questions.length)];
+            return {
+                type: 'quadratic',
+                ...q,
+                knowledgePoint: '二次函数性质',
+                feedback: getQuadraticFeedback()
+            };
+        }
+
+        function generateEquationQuestionData() {
+            const sum = Math.floor(Math.random() * 10) + 5;
+            const product = Math.floor(Math.random() * 10) + 5;
+            const types = ['sum', 'product', 'expression'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            if (type === 'sum') {
+                return {
+                    type: 'equation',
+                    question: `【韦达定理】方程x²-${sum}x+${product}=0的两根为x₁,x₂，求x₁+x₂的值。`,
+                    answer: `${sum}`,
+                    inputType: 'text',
+                    knowledgePoint: '韦达定理',
+                    feedback: getEquationFeedback()
+                };
+            } else if (type === 'product') {
+                return {
+                    type: 'equation',
+                    question: `【韦达定理】方程x²-${sum}x+${product}=0的两根为x₁,x₂，求x₁·x₂的值。`,
+                    answer: `${product}`,
+                    inputType: 'text',
+                    knowledgePoint: '韦达定理',
+                    feedback: getEquationFeedback()
+                };
+            } else {
+                const result = product - 2*sum + 4;
+                return {
+                    type: 'equation',
+                    question: `【韦达定理】方程x²-${sum}x+${product}=0的两根为x₁,x₂，求(x₁-2)(x₂-2)的值。`,
+                    answer: `${result}`,
+                    inputType: 'text',
+                    knowledgePoint: '韦达定理应用',
+                    feedback: getEquationFeedback()
+                };
+            }
+        }
+
+        function generateInequalityQuestionData() {
+            return {
+                type: 'inequality',
+                question: `【不等式组】解不等式组：{2x+1>3 且 x+2<5}`,
+                answer: '1<x<3',
+                inputType: 'text',
+                knowledgePoint: '不等式组求解',
+                feedback: getInequalityFeedback()
+            };
+        }
+
+        function generateProbabilityQuestionData() {
+            return {
+                type: 'probability',
+                question: `【概率】甲从A,B,C中随机选一个，乙从B,C,D中随机选一个，用树状图求两人选到相同类别的概率。`,
+                answer: '2/9',
+                inputType: 'text',
+                knowledgePoint: '树状图概率',
+                feedback: getProbabilityFeedback()
+            };
+        }
+
+        function generateGeometryQuestionData() {
+            const questions = [
+                {
+                    question: `【圆的性质】AB是⊙O的直径，弦CD⊥AB于E。下列结论正确的个数是：①∠ACD=∠ABD ②CE=ED ③∠ACB=90°`,
+                    options: ['0个', '1个', '2个', '3个'],
+                    answer: 3,
+                    inputType: 'choice'
+                },
+                {
+                    question: `【平行四边形】下列条件能判定四边形是平行四边形的是：①对角线互相平分 ②一组对边相等 ③两组对角相等`,
+                    options: ['①②', '①③', '②③', '①②③'],
+                    answer: 1,
+                    inputType: 'choice'
+                }
+            ];
+            const q = questions[Math.floor(Math.random() * questions.length)];
+            return {
+                type: 'geometry',
+                ...q,
+                knowledgePoint: '几何证明',
+                feedback: getGeometryFeedback()
+            };
+        }
+
+        // 显示考试题目
+        function showExamQuestion(index) {
+            currentExamIndex = index;
+            const q = examQuestions[index];
+            
+            document.getElementById('exam-q-number').textContent = `第 ${index + 1} 题（${q.points}分）`;
+            document.getElementById('exam-q-type').textContent = q.typeName;
+            document.getElementById('exam-question').innerHTML = q.question;
+            
+            // 绘制图形
+            drawExamGraph(q);
+            
+            // 显示选项或输入框
+            const optionsDiv = document.getElementById('exam-options');
+            const inputGroup = document.getElementById('exam-input-group');
+            
+            if (q.inputType === 'choice') {
+                optionsDiv.style.display = 'grid';
+                optionsDiv.className = 'options';
+                inputGroup.style.display = 'none';
+                
+                optionsDiv.innerHTML = q.options.map((opt, i) => 
+                    `<div class="option ${examAnswers[index] === i ? 'selected' : ''}" 
+                          onclick="selectExamOption(${i})" id="exam-opt-${i}">
+                          ${String.fromCharCode(65 + i)}. ${opt}
+                      </div>`
+                ).join('');
+            } else {
+                optionsDiv.style.display = 'none';
+                inputGroup.style.display = 'block';
+                document.getElementById('exam-answer').value = examAnswers[index] || '';
+            }
+            
+            // 更新导航
+            updateExamNav();
+        }
+
+        // 考试模式绘图
+        function drawExamGraph(q) {
+            const canvas = document.getElementById('exam-canvas');
+            const ctx = canvas.getContext('2d');
+            const w = canvas.width, h = canvas.height;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            if (q.type === 'function') {
+                drawExamFunction(ctx, w, h, q);
+            } else if (q.type === 'moving') {
+                drawExamMoving(ctx, w, h, q);
+            } else if (q.type === 'transform') {
+                drawExamTransform(ctx, w, h, q);
+            } else if (q.type === 'quadratic') {
+                drawExamQuadratic(ctx, w, h);
+            } else if (q.type === 'equation') {
+                drawExamEquation(ctx, w, h, q);
+            } else if (q.type === 'inequality') {
+                drawExamInequality(ctx, w, h, q);
+            } else if (q.type === 'probability') {
+                drawExamProbability(ctx, w, h, q);
+            } else if (q.type === 'geometry') {
+                drawExamGeometry(ctx, w, h, q);
+            }
+        }
+
+        function drawExamFunction(ctx, w, h, q) {
+            // 绘制坐标系
+            const padding = 40;
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            // x 轴
+            ctx.beginPath();
+            ctx.moveTo(padding, h/2);
+            ctx.lineTo(w - padding, h/2);
+            ctx.stroke();
+            
+            // y 轴
+            ctx.beginPath();
+            ctx.moveTo(w/2, padding);
+            ctx.lineTo(w/2, h - padding);
+            ctx.stroke();
+            
+            // 刻度
+            ctx.fillStyle = '#666';
+            ctx.font = '12px Noto Sans SC';
+            ctx.textAlign = 'center';
+            
+            for (let i = -4; i <= 4; i++) {
+                if (i !== 0) {
+                    const x = w/2 + i * 30;
+                    ctx.fillText(i.toString(), x, h/2 + 20);
+                    const y = h/2 - i * 30;
+                    ctx.fillText(i.toString(), w/2 - 15, y + 4);
+                }
+            }
+            
+            if (q.subType === 'linear') {
+                // 画直线
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(padding, h/2 - 60);
+                ctx.lineTo(w - padding, h/2 + 60);
+                ctx.stroke();
+                
+                // 标记点
+                ctx.fillStyle = '#764ba2';
+                ctx.beginPath();
+                ctx.arc(w/2 + 30, h/2 - 30, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillText('A', w/2 + 45, h/2 - 35);
+                
+                ctx.beginPath();
+                ctx.arc(w/2 + 60, h/2 - 60, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillText('B', w/2 + 75, h/2 - 65);
+            } else {
+                // 画双曲线
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                for (let x = 0.3; x <= 4; x += 0.1) {
+                    const y = 6 / x;
+                    if (y <= 4) {
+                        const px = w/2 + x * 30;
+                        const py = h/2 - y * 30;
+                        if (x === 0.3) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                }
+                ctx.stroke();
+                
+                ctx.beginPath();
+                for (let x = -4; x <= -0.3; x += 0.1) {
+                    const y = 6 / x;
+                    if (y >= -4) {
+                        const px = w/2 + x * 30;
+                        const py = h/2 - y * 30;
+                        if (x === -4) ctx.moveTo(px, py);
+                        else ctx.lineTo(px, py);
+                    }
+                }
+                ctx.stroke();
+                
+                // 标记点
+                ctx.fillStyle = '#764ba2';
+                ctx.beginPath();
+                ctx.arc(w/2 + 60, h/2 - 90, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillText('A(2,3)', w/2 + 75, h/2 - 85);
+            }
+        }
+
+        function drawExamMoving(ctx, w, h, q) {
+            // 画矩形
+            const rectW = 180, rectH = 120;
+            const x = (w - rectW) / 2, y = (h - rectH) / 2;
+            
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(x, y, rectW, rectH);
+            
+            // 标注顶点
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Noto Sans SC';
+            ctx.fillText('A', x - 15, y + rectH + 5);
+            ctx.fillText('B', x + rectW + 5, y + rectH + 5);
+            ctx.fillText('C', x + rectW + 5, y - 5);
+            ctx.fillText('D', x - 15, y - 5);
+            
+            // 边长标注
+            ctx.fillStyle = '#666';
+            ctx.fillText('AB=8', x + rectW/2, y + rectH + 25);
+            ctx.fillText('BC=6', x + rectW + 25, y + rectH/2);
+            
+            // 动点
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(x, y + rectH/2, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('P', x - 20, y + rectH/2 + 5);
+            
+            ctx.beginPath();
+            ctx.arc(x + rectW, y + rectH/2, 5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('Q', x + rectW + 15, y + rectH/2 + 5);
+            
+            // 运动方向箭头
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 2;
+            drawArrow(ctx, x, y + rectH - 20, x, y + 20, 'up');
+            drawArrow(ctx, x + rectW, y + rectH - 20, x + rectW, y + 20, 'up');
+        }
+
+        function drawExamTransform(ctx, w, h, q) {
+            // 绘制坐标系
+            const padding = 40;
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            ctx.beginPath();
+            ctx.moveTo(padding, h/2);
+            ctx.lineTo(w - padding, h/2);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(w/2, padding);
+            ctx.lineTo(w/2, h - padding);
+            ctx.stroke();
+            
+            // 原点
+            ctx.fillStyle = '#666';
+            ctx.font = '14px Noto Sans SC';
+            ctx.fillText('O', w/2 - 15, h/2 + 20);
+            
+            // 原始点A
+            ctx.fillStyle = '#667eea';
+            ctx.beginPath();
+            ctx.arc(w/2 + 90, h/2 - 90, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText('A(3,3)', w/2 + 100, h/2 - 95);
+            
+            // 变换后的点A'
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(w/2 - 90, h/2 - 90, 6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillText("A'", w/2 - 105, h/2 - 75);
+            
+            // 连接线
+            ctx.strokeStyle = '#764ba2';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.arc(w/2, h/2, 90, -Math.PI/4, Math.PI/4, false);
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function drawExamQuadratic(ctx, w, h) {
+            // 绘制坐标系
+            const padding = 40;
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            
+            ctx.beginPath();
+            ctx.moveTo(padding, h/2);
+            ctx.lineTo(w - padding, h/2);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(w/2, padding);
+            ctx.lineTo(w/2, h - padding);
+            ctx.stroke();
+            
+            // 画抛物线
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            for (let px = padding; px <= w - padding; px++) {
+                const x = (px - w/2) / 30;
+                const y = x * x - 2;
+                const py = h/2 - y * 25;
+                if (py >= padding && py <= h - padding) {
+                    if (px === padding) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+            }
+            ctx.stroke();
+            
+            // 对称轴
+            ctx.strokeStyle = '#e74c3c';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(w/2, padding);
+            ctx.lineTo(w/2, h - padding);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#e74c3c';
+            ctx.font = '12px Noto Sans SC';
+            ctx.fillText('对称轴 x=1', w/2 + 10, padding + 20);
+        }
+
+        function drawExamEquation(ctx, w, h, q) {
+            // 绘制一元二次方程示意图
+            ctx.fillStyle = '#333';
+            ctx.font = '16px Noto Sans SC';
+            ctx.textAlign = 'center';
+            
+            // 方程框
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(w/2 - 100, h/2 - 30, 200, 60);
+            
+            ctx.fillText('韦达定理', w/2, h/2 - 50);
+            ctx.fillText('x₁ + x₂ = -b/a', w/2, h/2 - 5);
+            ctx.fillText('x₁ · x₂ = c/a', w/2, h/2 + 25);
+            
+            // 装饰
+            ctx.fillStyle = '#667eea';
+            ctx.beginPath();
+            ctx.arc(w/2 - 80, h/2, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(w/2 + 80, h/2, 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#666';
+            ctx.font = '12px Noto Sans SC';
+            ctx.fillText('x₁', w/2 - 80, h/2 - 15);
+            ctx.fillText('x₂', w/2 + 80, h/2 - 15);
+        }
+
+        function drawExamInequality(ctx, w, h, q) {
+            // 绘制数轴和解集
+            const padding = 40;
+            
+            // 数轴
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding, h/2);
+            ctx.lineTo(w - padding, h/2);
+            ctx.stroke();
+            
+            // 箭头
+            ctx.beginPath();
+            ctx.moveTo(w - padding - 10, h/2 - 5);
+            ctx.lineTo(w - padding, h/2);
+            ctx.lineTo(w - padding - 10, h/2 + 5);
+            ctx.stroke();
+            
+            // 刻度
+            ctx.fillStyle = '#666';
+            ctx.font = '14px Noto Sans SC';
+            ctx.textAlign = 'center';
+            
+            for (let i = -2; i <= 5; i++) {
+                const x = padding + 40 + i * 40;
+                ctx.beginPath();
+                ctx.moveTo(x, h/2 - 5);
+                ctx.lineTo(x, h/2 + 5);
+                ctx.stroke();
+                ctx.fillText(i.toString(), x, h/2 + 25);
+            }
+            
+            // 解集区域（1 < x < 3）
+            ctx.fillStyle = 'rgba(102, 126, 234, 0.3)';
+            ctx.fillRect(padding + 40 + 1*40 + 5, h/2 - 30, 2*40 - 10, 60);
+            
+            // 空心圆（不包含边界）
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(padding + 40 + 1*40, h/2, 8, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.arc(padding + 40 + 3*40, h/2, 8, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // 标签
+            ctx.fillStyle = '#667eea';
+            ctx.font = '14px Noto Sans SC';
+            ctx.fillText('1 < x < 3', w/2, h/2 - 50);
+            ctx.fillText('解集区域', w/2, h/2 - 70);
+        }
+
+        function drawExamProbability(ctx, w, h, q) {
+            // 画树状图
+            ctx.fillStyle = '#666';
+            ctx.font = '14px Noto Sans SC';
+            
+            // 起点
+            ctx.beginPath();
+            ctx.arc(40, h/2, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 甲的分支
+            const aChoices = ['A', 'B', 'C'];
+            aChoices.forEach((choice, i) => {
+                const y1 = 40 + i * 50;
+                
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(48, h/2);
+                ctx.lineTo(100, y1);
+                ctx.stroke();
+                
+                ctx.fillStyle = '#667eea';
+                ctx.beginPath();
+                ctx.arc(110, y1, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#333';
+                ctx.fillText(choice, 125, y1 + 5);
+                
+                // 乙的分支
+                const bChoices = ['B', 'C', 'D'];
+                bChoices.forEach((bChoice, j) => {
+                    const y2 = y1 - 20 + j * 20;
+                    
+                    ctx.strokeStyle = '#764ba2';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(115, y1);
+                    ctx.lineTo(180, y2);
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#764ba2';
+                    ctx.beginPath();
+                    ctx.arc(190, y2, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#666';
+                    ctx.font = '11px Noto Sans SC';
+                    ctx.fillText(bChoice, 200, y2 + 4);
+                });
+            });
+            
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Noto Sans SC';
+            ctx.fillText('甲', 70, h/2 - 20);
+            ctx.fillText('乙', 150, 25);
+        }
+
+        function drawExamGeometry(ctx, w, h, q) {
+            if (q.question.includes('圆')) {
+                // 画圆
+                const centerX = w/2, centerY = h/2, radius = 80;
+                
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                // 直径AB
+                ctx.beginPath();
+                ctx.moveTo(centerX - radius, centerY);
+                ctx.lineTo(centerX + radius, centerY);
+                ctx.stroke();
+                
+                // 弦CD
+                ctx.beginPath();
+                ctx.moveTo(centerX - 40, centerY - 60);
+                ctx.lineTo(centerX - 40, centerY + 60);
+                ctx.stroke();
+                
+                // 标注
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Noto Sans SC';
+                ctx.fillText('A', centerX - radius - 15, centerY + 5);
+                ctx.fillText('B', centerX + radius + 5, centerY + 5);
+                ctx.fillText('C', centerX - 65, centerY - 60);
+                ctx.fillText('D', centerX - 65, centerY + 65);
+                ctx.fillText('O', centerX + 5, centerY - 10);
+                ctx.fillText('E', centerX - 55, centerY - 10);
+                
+                // 圆心
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                // 画四边形
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 3;
+                
+                ctx.beginPath();
+                ctx.moveTo(80, 180);
+                ctx.lineTo(220, 180);
+                ctx.lineTo(260, 80);
+                ctx.lineTo(120, 80);
+                ctx.closePath();
+                ctx.stroke();
+                
+                // 标注
+                ctx.fillStyle = '#333';
+                ctx.font = '14px Noto Sans SC';
+                ctx.fillText('A', 65, 195);
+                ctx.fillText('B', 225, 195);
+                ctx.fillText('C', 265, 80);
+                ctx.fillText('D', 105, 75);
+                
+                // 对角线
+                ctx.strokeStyle = '#667eea';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.moveTo(80, 180);
+                ctx.lineTo(260, 80);
+                ctx.moveTo(220, 180);
+                ctx.lineTo(120, 80);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                ctx.fillText('O', 185, 135);
+            }
+        }
+
+        // 选择题选项
+        function selectExamOption(index) {
+            document.querySelectorAll('#exam-options .option').forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) opt.classList.add('selected');
+            });
+            examAnswers[currentExamIndex] = index;
+            updateExamNav();
+        }
+
+        // 更新导航按钮
+        function updateExamNav() {
+            const navDiv = document.getElementById('exam-question-nav');
+            navDiv.innerHTML = examQuestions.map((q, i) => {
+                let className = 'question-nav-btn';
+                if (i === currentExamIndex) className += ' current';
+                else if (examAnswers[i] !== null) className += ' answered';
+                if (q.flagged) className += ' flagged';
+                return `<button class="${className}" onclick="showExamQuestion(${i})">${i + 1}</button>`;
+            }).join('');
+            
+            // 更新进度
+            const answered = examAnswers.filter(a => a !== null).length;
+            document.getElementById('exam-progress-text').textContent = `${answered}/${examQuestions.length}`;
+            document.getElementById('exam-progress-fill').style.width = `${answered / examQuestions.length * 100}%`;
+        }
+
+        // 上一题/下一题/标记
+        function prevExamQuestion() {
+            if (currentExamIndex > 0) {
+                saveExamAnswer();
+                showExamQuestion(currentExamIndex - 1);
+            }
+        }
+
+        function nextExamQuestion() {
+            saveExamAnswer();
+            if (currentExamIndex < examQuestions.length - 1) {
+                showExamQuestion(currentExamIndex + 1);
+            }
+        }
+
+        function flagExamQuestion() {
+            examQuestions[currentExamIndex].flagged = !examQuestions[currentExamIndex].flagged;
+            updateExamNav();
+        }
+
+        function saveExamAnswer() {
+            const q = examQuestions[currentExamIndex];
+            if (q.inputType === 'text') {
+                examAnswers[currentExamIndex] = document.getElementById('exam-answer').value.trim();
+            }
+        }
+
+        // 计时器
+        function startExamTimer() {
+            updateTimerDisplay();
+            examTimer = setInterval(() => {
+                examTimeLeft--;
+                updateTimerDisplay();
+                
+                if (examTimeLeft <= 0) {
+                    clearInterval(examTimer);
+                    alert('时间到！自动交卷');
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(examTimeLeft / 60);
+            const seconds = examTimeLeft % 60;
+            const timerDiv = document.getElementById('exam-timer');
+            timerDiv.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            timerDiv.className = 'exam-timer';
+            if (examTimeLeft <= 300) timerDiv.classList.add('danger');
+            else if (examTimeLeft <= 600) timerDiv.classList.add('warning');
+        }
+
+        // 交卷
+        function submitExam() {
+            if (examTimer) clearInterval(examTimer);
+            
+            saveExamAnswer();
+            
+            const unanswered = examAnswers.filter(a => a === null || a === '').length;
+            if (unanswered > 0) {
+                if (!confirm(`还有 ${unanswered} 道题未作答，确定交卷吗？`)) {
+                    examTimer = setInterval(() => {
+                        examTimeLeft--;
+                        updateTimerDisplay();
+                        if (examTimeLeft <= 0) {
+                            clearInterval(examTimer);
+                            submitExam();
+                        }
+                    }, 1000);
+                    return;
+                }
+            }
+            
+            // 批改
+            gradeExam();
+        }
+
+        // 批改并生成报告
+        function gradeExam() {
+            // 隐藏考试界面
+            document.getElementById('exam-container').classList.remove('active');
+            
+            let correct = 0;
+            let wrong = 0;
+            let totalScore = 0;
+            const wrongQuestions = [];
+            const weaknessStats = {};
+            
+            examQuestions.forEach((q, i) => {
+                const userAnswer = examAnswers[i];
+                let isCorrect = false;
+                
+                if (q.inputType === 'choice') {
+                    isCorrect = userAnswer === q.answer;
+                } else {
+                    isCorrect = userAnswer === q.answer || 
+                               userAnswer.replace(/\s/g, '') === q.answer.replace(/\s/g, '');
+                }
+                
+                if (isCorrect) {
+                    correct++;
+                    totalScore += q.points;
+                } else {
+                    wrong++;
+                    wrongQuestions.push({
+                        index: i + 1,
+                        question: q.question,
+                        userAnswer: userAnswer || '未作答',
+                        correctAnswer: q.inputType === 'choice' ? 
+                            `${String.fromCharCode(65 + q.answer)}. ${q.options[q.answer]}` : q.answer,
+                        knowledgePoint: q.knowledgePoint,
+                        feedback: q.feedback,
+                        points: q.points
+                    });
+                    
+                    // 统计薄弱知识点
+                    weaknessStats[q.knowledgePoint] = (weaknessStats[q.knowledgePoint] || 0) + 1;
+                }
+            });
+            
+            // 生成报告
+            generateReport(correct, wrong, totalScore, wrongQuestions, weaknessStats);
+        }
+
+        // 生成成绩报告
+        function generateReport(correct, wrong, totalScore, wrongQuestions, weaknessStats) {
+            document.getElementById('report-card').classList.add('active');
+            
+            // 分数
+            document.getElementById('report-score').textContent = totalScore;
+            document.getElementById('report-correct').textContent = correct;
+            document.getElementById('report-wrong').textContent = wrong;
+            
+            // 用时
+            const usedTime = Math.floor((Date.now() - examStartTime) / 1000);
+            const minutes = Math.floor(usedTime / 60);
+            const seconds = usedTime % 60;
+            document.getElementById('report-time').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // 正确率
+            const accuracy = Math.round(correct / examQuestions.length * 100);
+            document.getElementById('report-accuracy').textContent = `${accuracy}%`;
+            
+            // 薄弱知识点
+            const weaknessList = document.getElementById('weakness-list');
+            const sortedWeakness = Object.entries(weaknessStats).sort((a, b) => b[1] - a[1]);
+            
+            weaknessList.innerHTML = sortedWeakness.map(([point, count]) => `
+                <div class="weakness-item">
+                    <h4>⚠️ ${point}（错${count}题）</h4>
+                    <p>建议：针对此知识点进行专项练习，重点掌握解题技巧和公式应用。</p>
+                </div>
+            `).join('');
+            
+            // 错题详解
+            const wrongList = document.getElementById('wrong-questions-list');
+            wrongList.innerHTML = wrongQuestions.map(wq => `
+                <div class="wrong-question">
+                    <h4>第 ${wq.index} 题（-${wq.points}分）</h4>
+                    <p><strong>题目：</strong>${wq.question}</p>
+                    <p><strong>你的答案：</strong>${wq.userAnswer}</p>
+                    <p><strong>正确答案：</strong><span style="color: #28a745;">${wq.correctAnswer}</span></p>
+                    <p><strong>知识点：</strong>${wq.knowledgePoint}</p>
+                    <div style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                        ${wq.feedback}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 针对性复习
+        function reviewWeakness() {
+            closeReport();
+            // 自动跳转到第一个薄弱知识点的练习模块
+            alert('已返回练习模式，建议重点练习刚才做错的知识点！');
+        }
+
+        // 关闭报告
+        function closeReport() {
+            document.getElementById('report-card').classList.remove('active');
+            document.getElementById('practice-tabs').style.display = 'block';
+            document.querySelector('.start-exam-btn').style.display = 'inline-block';
+            
+            // 显示第一个练习卡片
+            document.querySelectorAll('.card')[0].classList.add('active');
+        }
+
+        // 页面加载
         window.onload = function() {
             generateFunctionQuestion();
             generateMovingQuestion();
+            generateTransformQuestion();
+            generateQuadraticQuestion();
+            generateEquationQuestion();
+            generateInequalityQuestion();
+            generateProbabilityQuestion();
+            generateGeometryQuestion();
         };
     </script>
 </body>
