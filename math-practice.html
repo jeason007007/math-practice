@@ -660,6 +660,88 @@
                 display: none;
             }
         }
+
+    <!-- 性能优化 CSS -->
+    <style>
+        /* 启用硬件加速 */
+        body, .card, .tab, button {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        /* 优化滚动 */
+        body {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: none;
+        }
+
+        .container {
+            touch-action: pan-y;
+        }
+
+        /* 优化动画 */
+        .card.active {
+            animation: slideIn 0.2s ease-out;
+            will-change: opacity, transform;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 优化按钮 */
+        .tab, button {
+            will-change: background-color, transform;
+            touch-action: manipulation;
+        }
+
+        /* 优化 Canvas */
+        canvas {
+            touch-action: none;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        /* 优化模糊滤镜（iOS 性能问题） */
+        .tabs-row {
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+        }
+
+        /* 减少重绘 */
+        .card {
+            contain: layout paint;
+        }
+
+        /* 优化输入框 */
+        input[type="text"] {
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
+        }
+
+        /* 优化反馈显示 */
+        .feedback {
+            will-change: opacity, transform;
+        }
+
+        /* 减少阴影渲染 */
+        .card {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tab.active {
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+    </style>
     </style>
 </head>
 <body>
@@ -1143,7 +1225,130 @@
 
 
     <script>
-        // 全局变量
+    // ==================== 性能优化 ====================
+
+    // 1. 使用 requestAnimationFrame 代替 setTimeout
+    function optimizedRequestAnimationFrame(callback) {
+        requestAnimationFrame(callback);
+    }
+
+    // 2. 防抖函数（减少事件触发频率）
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // 3. 优化 switchTab 函数
+    const originalSwitchTab = window.switchTab;
+    window.switchTab = function(tab) {
+        // 使用 requestAnimationFrame 优化动画
+        requestAnimationFrame(() => {
+            originalSwitchTab(tab);
+        });
+    };
+
+    // 4. 优化 Canvas 渲染（懒加载）
+    function lazyLoadCanvas(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        // 使用 IntersectionObserver
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Canvas 进入视口时再渲染
+                        console.log('Canvas 进入视口：' + canvasId);
+                        observer.unobserve(canvas);
+                    }
+                });
+            });
+            observer.observe(canvas);
+        }
+    }
+
+    // 5. 初始化懒加载
+    document.addEventListener('DOMContentLoaded', () => {
+        // 懒加载所有 Canvas
+        const canvases = document.querySelectorAll('canvas');
+        canvases.forEach(canvas => {
+            lazyLoadCanvas(canvas.id);
+        });
+
+        console.log('✅ 性能优化已加载');
+    });
+
+
+        
+    // ==================== 性能优化 ====================
+
+    // 1. 使用 requestAnimationFrame 优化动画
+    function optimizedRequestAnimationFrame(callback) {
+        requestAnimationFrame(callback);
+    }
+
+    // 2. 防抖函数（减少事件触发频率）
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // 3. 优化 switchTab 函数
+    const originalSwitchTab = window.switchTab;
+    window.switchTab = function(tab) {
+        // 使用 requestAnimationFrame 优化动画
+        requestAnimationFrame(() => {
+            originalSwitchTab(tab);
+        });
+    };
+
+    // 4. 优化 Canvas 渲染（懒加载）
+    function lazyLoadCanvas(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        // 使用 IntersectionObserver
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Canvas 进入视口时再渲染
+                        console.log('Canvas 进入视口：' + canvasId);
+                        observer.unobserve(canvas);
+                    }
+                });
+            });
+            observer.observe(canvas);
+        }
+    }
+
+    // 5. 初始化懒加载
+    document.addEventListener('DOMContentLoaded', () => {
+        // 懒加载所有 Canvas
+        const canvases = document.querySelectorAll('canvas');
+        canvases.forEach(canvas => {
+            lazyLoadCanvas(canvas.id);
+        });
+
+        console.log('✅ 性能优化已加载');
+    });
+
+
+// 全局变量
         let currentFunctionQuestion = null;
         let currentMovingQuestion = null;
         let currentTransformQuestion = null;
