@@ -959,6 +959,188 @@
             <div class="hint" id="geometry-hint"></div>
         </div>
     </div>
+        <!-- 整式运算练习 -->
+        <div class="card" id="expression-card">
+            <div class="question-type">整式运算</div>
+            <div class="question" id="expression-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="expression-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('expression')" class="btn-secondary">重置</button>
+                <button onclick="checkExpressionAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="expression-result"></div>
+
+            <div class="hint" id="expression-hint" style="display: none;">
+                <strong>提示：</strong><span id="expression-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="expression-feedback"></div>
+        </div>
+
+        <!-- 二次根式练习 -->
+        <div class="card" id="radical-card">
+            <div class="question-type">二次根式</div>
+            <div class="question" id="radical-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="radical-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('radical')" class="btn-secondary">重置</button>
+                <button onclick="checkRadicalAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="radical-result"></div>
+
+            <div class="hint" id="radical-hint" style="display: none;">
+                <strong>提示：</strong><span id="radical-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="radical-feedback"></div>
+        </div>
+
+        <!-- 一元二次方程练习 -->
+        <div class="card" id="quadEquation-card">
+            <div class="question-type">一元二次方程</div>
+            <div class="question" id="quadEquation-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="quadEquation-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('quadEquation')" class="btn-secondary">重置</button>
+                <button onclick="checkQuadequationAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="quadEquation-result"></div>
+
+            <div class="hint" id="quadEquation-hint" style="display: none;">
+                <strong>提示：</strong><span id="quadEquation-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="quadEquation-feedback"></div>
+        </div>
+
+        <!-- 分式方程练习 -->
+        <div class="card" id="fractionalEquation-card">
+            <div class="question-type">分式方程</div>
+            <div class="question" id="fractionalEquation-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="fractionalEquation-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('fractionalEquation')" class="btn-secondary">重置</button>
+                <button onclick="checkFractionalequationAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="fractionalEquation-result"></div>
+
+            <div class="hint" id="fractionalEquation-hint" style="display: none;">
+                <strong>提示：</strong><span id="fractionalEquation-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="fractionalEquation-feedback"></div>
+        </div>
+
+        <!-- 解直角三角形练习 -->
+        <div class="card" id="rightTriangle-card">
+            <div class="question-type">解直角三角形</div>
+            <div class="question" id="rightTriangle-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="rightTriangle-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('rightTriangle')" class="btn-secondary">重置</button>
+                <button onclick="checkRighttriangleAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="rightTriangle-result"></div>
+
+            <div class="hint" id="rightTriangle-hint" style="display: none;">
+                <strong>提示：</strong><span id="rightTriangle-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="rightTriangle-feedback"></div>
+        </div>
+
+        <!-- 三角形全等练习 -->
+        <div class="card" id="congruent-card">
+            <div class="question-type">三角形全等</div>
+            <div class="question" id="congruent-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="congruent-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('congruent')" class="btn-secondary">重置</button>
+                <button onclick="checkCongruentAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="congruent-result"></div>
+
+            <div class="hint" id="congruent-hint" style="display: none;">
+                <strong>提示：</strong><span id="congruent-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="congruent-feedback"></div>
+        </div>
+
+        <!-- 平行四边形判定练习 -->
+        <div class="card" id="parallelogram-card">
+            <div class="question-type">平行四边形判定</div>
+            <div class="question" id="parallelogram-question">
+                题目加载中...
+            </div>
+
+            <div class="input-group">
+                <label>输入你的答案</label>
+                <input type="text" id="parallelogram-answer" placeholder="输入你的答案">
+            </div>
+
+            <div class="button-group">
+                <button onclick="resetResult('parallelogram')" class="btn-secondary">重置</button>
+                <button onclick="checkParallelogramAnswer()" class="btn-primary">提交答案</button>
+            </div>
+
+            <div class="result" id="parallelogram-result"></div>
+
+            <div class="hint" id="parallelogram-hint" style="display: none;">
+                <strong>提示：</strong><span id="parallelogram-hint-text"></span>
+            </div>
+
+            <div class="feedback" id="parallelogram-feedback"></div>
+        </div>
+
 
     <script>
         // 全局变量
